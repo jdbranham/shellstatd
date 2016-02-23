@@ -3,17 +3,17 @@
 ACTION=$1
 if [ "$ACTION" == "" ]
 then
-   echo "Usage:  quickstatd start | stop | restart"
+   echo "Usage:  shellstatd start | stop | restart"
    exit 1
 fi
 
-if [ -f "/etc/quickstatd.conf" ]
+if [ -f "/etc/shellstatd.conf" ]
 then
-   CONFIG_FILE="/etc/quickstatd.conf"
+   CONFIG_FILE="/etc/shellstatd.conf"
 fi
-if [ -f "./quickstatd.conf" ]
+if [ -f "./shellstatd.conf" ]
 then
-   CONFIG_FILE="./quickstatd.conf"
+   CONFIG_FILE="./shellstatd.conf"
 fi
 
 if [ ! -f "$CONFIG_FILE" ]
@@ -25,15 +25,15 @@ fi
 
 
 function start() {
-   # check for previously running quickstatd
+   # check for previously running shellstatd
    if [ -f "$PID_FILE" ]
    then
-      echo "quickstatd was already running.  No action taken."
+      echo "shellstatd was already running.  No action taken."
       exit 1
    fi 
    # run it!
    echo "Starting"
-   SCRIPT_DIR="$QUICKSTATD_HOME/metric.d"
+   SCRIPT_DIR="$SHELLSTATD_HOME/metric.d"
    for METRIC in $metrics
    do
       $SCRIPT_DIR/$METRIC.sh $CONFIG_FILE &
@@ -44,10 +44,10 @@ function start() {
 
 
 function stop() {
-   # Be sure quickstatd is running
+   # Be sure shellstatd is running
    if [ ! -f "$PID_FILE" ]
    then
-      echo "quickstatd was not running.  No action taken."
+      echo "shellstatd was not running.  No action taken."
       exit 1
    fi
    echo "Stopping"
