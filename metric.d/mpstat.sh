@@ -5,6 +5,6 @@ CONFIG_FILE=$1
 HOSTNAME=$(hostname -s)
 
 echo "Launching mpstat monitoring, reporting data to $graphite_host"
-mpstat -P ALL $graphite_interval_seconds | gawk -f $QUICKSTATD_HOME/awk/mpstat.awk hostname=$HOSTNAME graphite_host=$graphite_host graphite_port=$graphite_port &
+mpstat -P ALL $graphite_interval_seconds | gawk -f $SHELLSTATD_HOME/awk/mpstat.awk hostname=$HOSTNAME graphite_host=$graphite_host graphite_port=$graphite_port &
 echo $! >> $PID_FILE
  
