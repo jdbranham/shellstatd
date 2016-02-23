@@ -1,6 +1,10 @@
-
-quickstatd gathers OS-level performance statistics and sends
+shellstatd gathers OS-level performance statistics and sends
 them to a running instance of Graphite.
+
+This is a modified version of Travis Bear's quickstatd -
+https://bitbucket.org/travis_bear/quickstatd
+Thanks Travis!
+
 
 It is a collection of bash shell scripts that gather the output
 from existing system monitoring tools like vmstat, sar, and iostat,
@@ -8,18 +12,16 @@ and forwards the data on to Graphite where it can be
 visualized.
 
 There are other, more "production-ready" tools (like collectd, with
-the graphite plugin) that do this.  I wrote quickstatd for the
-following reasons:
+the graphite plugin) that do this. But there are some cases where those tools are unavailable. 
 
-  * I didn't need a ton of options, but I did want something simple I
-    could get up and running fast, with minimal fuss and configuration.
+  * This is a simple, fast, minimal configuration tool
+  
+  * Does not require Netcat [nc]
 
-  * I wanted something I could easily push into an environment that
-    has no internet access.  Installing the .deb or .rpm packages for 
-    collectd was problematic due to long unmet dependancy chains.
+  * This works on system with no internet access, or older production systems that would require compiling dependencies for tools like collectd.
 
 
-Quickstatd is tested and works on CentOS (Fedora) and Ubuntu
+shellstatd is tested and works on CentOS (Fedora) and Ubuntu
 (Debian).  With small modifications it could be made to work
 on OS X, Solaris, etc.  
 
@@ -32,16 +34,16 @@ Prerequisites:
       need to install it via apt-get.
 
 
-To install quickstatd, run installer.sh.  Usage:
+To install shellstatd, run installer.sh.  Usage:
 
     sudo install.sh <install dir> <graphite host> <monitor interval> [ graphite port (default is 2003) ]
 
 
-Quickstatd is controlled by a startup script in /etc/init.d.  Usage:
+shellstatd is controlled by a startup script in /etc/init.d.  Usage:
 
-    /etc/init.d/quickstatd  start | stop | restart
+    /etc/init.d/shellstatd  start | stop | restart
 
 
-To modify quickstatd settings (such as which metrics you wish to
-monitor), edit /etc/quickstatd.conf.
+To modify shellstatd settings (such as which metrics you wish to
+monitor), edit /etc/shellstatd.conf.
 
