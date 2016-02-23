@@ -3,7 +3,7 @@
 function repeat {
    while true
    do
-      echo "$1" | /bin/bash
+      echo "$1" | /bin/bash | sendToGraphite
       sleep $graphite_interval_seconds
    done
 }
