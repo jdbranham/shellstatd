@@ -11,11 +11,11 @@
    if ($3=="runq-sz") {
    }
    else {
-      print "servers." hostname ".sar.load.runq-sz " $3 " " systime() > "/dev/tcp/" graphite_host "/" graphite_port
-      print "servers." hostname ".sar.load.plist-sz " $4 " " systime() > "/dev/tcp/" graphite_host "/" graphite_port
-      print "servers." hostname ".sar.load.ldavg-1 " $5 " " systime() > "/dev/tcp/" graphite_host "/" graphite_port
-      print "servers." hostname ".sar.load.ldavg-5 " $6 " " systime() > "/dev/tcp/" graphite_host "/" graphite_port
-      print "servers." hostname ".sar.load.ldavg-15 " $7 " " systime() > "/dev/tcp/" graphite_host "/" graphite_port
+      print "servers." hostname ".sar.load.runq-sz " $3 " " systime() "> /dev/tcp/" graphite_host "/" graphite_port
+      print "servers." hostname ".sar.load.plist-sz " $4 " " systime() "> /dev/tcp/" graphite_host "/" graphite_port
+      print "servers." hostname ".sar.load.ldavg-1 " $5 " " systime() "> /dev/tcp/" graphite_host "/" graphite_port
+      print "servers." hostname ".sar.load.ldavg-5 " $6 " " systime() "> /dev/tcp/" graphite_host "/" graphite_port
+      print "servers." hostname ".sar.load.ldavg-15 " $7 " " systime() "> /dev/tcp/" graphite_host "/" graphite_port
    }
 }
 
