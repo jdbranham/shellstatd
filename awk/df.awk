@@ -7,7 +7,7 @@
 # none                  5.0M     0  5.0M   0% /run/lock
 # none                  2.0G  700K  2.0G   1% /run/shm
 
-. ../graphite_send;
+@include ../graphite_send.sh;
 
 {
    if ($1=="Filesystem") {
