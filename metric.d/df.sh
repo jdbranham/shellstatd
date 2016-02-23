@@ -11,7 +11,8 @@ function repeat {
 CONFIG_FILE=$1
 . $CONFIG_FILE
 HOSTNAME=$(hostname -s)
+. ../graphite_send.sh
 
 echo "Launching df monitoring, reporting data to $graphite_host"
-repeat "df -hP | gawk -f $SHELLSTATD_HOME/awk/df.awk hostname=$HOSTNAME graphite_host=$graphite_host graphite_port=$graphite_port"
+repeat "df -hP | gawk -f $SHELLSTATD_HOME/awk/df.awk hostname=$HOSTNAME"
  
