@@ -7,13 +7,14 @@
 # none                  5.0M     0  5.0M   0% /run/lock
 # none                  2.0G  700K  2.0G   1% /run/shm
 
+. ../graphite_send;
 
 {
    if ($1=="Filesystem") {
    }
    else {
       gsub(/\//, "_", $6)
-      print "servers." hostname ".df.use." $6 " " substr($5,0,length($5)-1) " " systime() | graphite_send_command
+      print sendToGraphite "servers." hostname ".df.use." $6 " " substr($5,0,length($5)-1) " " systime()
    }
 }
 

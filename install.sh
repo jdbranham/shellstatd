@@ -56,11 +56,11 @@ cp -r awk $INSTALL_DIR
 cp -r metric.d $INSTALL_DIR
 cat conf/shellstatd.conf >> $CONFIG
 cp shellstatd $INIT_DIR
+cp graphite_send.sh $INIT_DIR
 
 echo "graphite_host=\"$GRAPHITE_HOST\"" >> $CONFIG
 echo "graphite_port=\"$GRAPHITE_PORT\"" >> $CONFIG
 echo "graphite_interval_seconds=\"$MONITOR_INTERVAL\"" >> $CONFIG
-echo "graphite_send_command=\"{ read payload; echo \\\$payload > /dev/tcp/\$graphite_host/\$graphite_port; }\"" >> $CONFIG
 
 
 #if ! sar 1 1 > /dev/null 2>&1
