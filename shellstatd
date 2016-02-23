@@ -33,6 +33,7 @@ function start() {
    fi 
    # run it!
    echo "Starting"
+   echo "SHELLSTATD_HOME =" $SHELLSTATD_HOME
    SCRIPT_DIR="$SHELLSTATD_HOME/metric.d"
    for METRIC in $metrics
    do
