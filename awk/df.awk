@@ -13,7 +13,7 @@
    }
    else {
       gsub(/\//, "_", $6)
-      print sendToGraphite "servers." hostname ".df.use." $6 " " substr($5,0,length($5)-1) " " systime()
+      print "sendToGraphite servers." hostname ".df.use." $6 " " substr($5,0,length($5)-1) " " systime()
    }
 }
 
