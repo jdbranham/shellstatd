@@ -1,1 +1,5 @@
-function sendToGraphite { read payload; echo $payload > /dev/tcp/$graphite_host/$graphite_port; }
+function sendToGraphite { 
+  while IFS= read -r line; do
+    echo "$line" > /dev/tcp/$graphite_host/$graphite_port
+  done < "$file"
+}
