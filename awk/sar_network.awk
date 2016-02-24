@@ -9,13 +9,13 @@
 
 /^[0-9]/{
    if ($3==interface) {
-      print "servers." hostname ".sar.network." $3 ".rxpck_persec " $4 " " systime() " > /dev/tcp/" graphite_host "/" graphite_port
-      print "servers." hostname ".sar.network." $3 ".txpck_persec " $5 " " systime() " > /dev/tcp/" graphite_host "/" graphite_port
-      print "servers." hostname ".sar.network." $3 ".rx_" units "_persec " $6 " " systime() " > /dev/tcp/" graphite_host "/" graphite_port
-      print "servers." hostname ".sar.network." $3 ".tx_" units "_persec " $7 " " systime() " > /dev/tcp/" graphite_host "/" graphite_port
-      print "servers." hostname ".sar.network." $3 ".rxcmp_persec " $8 " " systime() " > /dev/tcp/" graphite_host "/" graphite_port
-      print "servers." hostname ".sar.network." $3 ".txcmp_persec " $9 " " systime() " > /dev/tcp/" graphite_host "/" graphite_port
-      print "servers." hostname ".sar.network." $3 ".rxmcst_persec " $10 " " systime() " > /dev/tcp/" graphite_host "/" graphite_port
+      print "servers." hostname ".sar.network." $3 ".rxpck_persec " $4 " " systime()
+      print "servers." hostname ".sar.network." $3 ".txpck_persec " $5 " " systime()
+      print "servers." hostname ".sar.network." $3 ".rx_" units "_persec " $6 " " systime()
+      print "servers." hostname ".sar.network." $3 ".tx_" units "_persec " $7 " " systime()
+      print "servers." hostname ".sar.network." $3 ".rxcmp_persec " $8 " " systime()
+      print "servers." hostname ".sar.network." $3 ".txcmp_persec " $9 " " systime()
+      print "servers." hostname ".sar.network." $3 ".rxmcst_persec " $10 " " systime()
    }
 }
 
