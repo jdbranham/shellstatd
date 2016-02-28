@@ -1,7 +1,7 @@
 shellstatd gathers OS-level performance statistics and sends
 them to a running instance of Graphite.
 
-This is a modified version of Travis Bear's quickstatd -
+This is based on Travis Bear's quickstatd -
 https://bitbucket.org/travis_bear/quickstatd
 Thanks Travis!
 
@@ -36,7 +36,7 @@ Prerequisites:
 
 To install shellstatd, run installer.sh.  Usage:
 
-    sudo install.sh <install dir> <graphite host> <monitor interval> [ graphite port (default is 2003) ]
+    [sudo] ./install.sh <install dir> <graphite host> <monitor interval> [ graphite port (default is 2003) ]
 
 
 shellstatd is controlled by a startup script in /etc/init.d.  Usage:
