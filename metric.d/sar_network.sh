@@ -3,7 +3,7 @@
 CONFIG_FILE=$1
 . $CONFIG_FILE
 HOSTNAME=$(hostname -s)
-. $SHELLSTATD_HOME/graphite_send.sh
+. $SHELLSTATD_HOME/lib/graphite_send.sh
 
 # get the units -- bytes or KB?
 U=$(sar -n DEV 1 1 | head -4 | gawk '/IFACE/{print $6}')

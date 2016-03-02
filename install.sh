@@ -7,7 +7,7 @@ MONITOR_INTERVAL=$3
 GRAPHITE_PORT=$4
 DEFAULT_GRAPHITE_PORT="2003"
 
-CONFIG="$INSTALL_DIR/shellstatd.conf"
+CONFIG="$INSTALL_DIR/conf/shellstatd.conf"
 PID_FILE="$INSTALL_DIR/.shellstatd.pid"
 INIT_DIR="$INSTALL_DIR"
 
@@ -54,9 +54,10 @@ echo >> $CONFIG
 # copy bits to new dir
 cp -r awk $INSTALL_DIR
 cp -r metric.d $INSTALL_DIR
-cat conf/shellstatd.conf >> $CONFIG
+cp -r lib $INSTALL_DIR
+cp -r conf $INSTALL_DIR
+cat conf/shellstatd.starter.conf >> $CONFIG
 cp shellstatd $INIT_DIR
-cp graphite_send.sh $INIT_DIR
 
 echo "graphite_host=\"$GRAPHITE_HOST\"" >> $CONFIG
 echo "graphite_port=\"$GRAPHITE_PORT\"" >> $CONFIG
