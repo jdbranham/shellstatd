@@ -11,7 +11,6 @@ function repeatJolokia {
    while true
    do
       echo $1
-      JSON_DEBUG=1
       $1
       sleep $graphite_interval_seconds
    done
