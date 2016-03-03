@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Requires JSON.sh
 
 function jolokiaRequest { 
