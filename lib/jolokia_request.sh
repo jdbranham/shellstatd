@@ -12,7 +12,7 @@ function jolokiaRequest {
       curl -s ${LINE} | $SHELLSTATD_HOME/lib/JSON.sh -b > $TEMP_FILE
       local MBEAN_NAME=`extractMBeanName $TEMP_FILE`
       rm $TEMP_FILE
-      printf $MBEAN_NAME\n
+      echo -e "$MBEAN_NAME\n
       echo .
    done
    # close file
@@ -24,9 +24,8 @@ function extractMBeanName {
    local MATCH_BEAN='\["request","mbean"\]'
    local MATCH_REMOVE='[\:type=,\:name=,\=,\", ]'
    local MBEAN="`egrep $MATCH_BEAN $TEMP_FILE`"
-   printf "Begin - $MBEAN\n"
+   echo -e "Begin - $MBEAN\n"
    MBEAN="${MBEAN/$MATCH_BEAN/$HOSTNAME}" 
-   printf $MBEAN | sed 's/$MATCH_REMOVE//g'
-   printf \n
+   echo $MBEAN | sed 's/$MATCH_REMOVE//g'
    # $MBEAN=${MBEAN/\'MATCH_BEANTYPE\'/\.}
 }
