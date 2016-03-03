@@ -62,6 +62,7 @@ function start() {
    SCRIPT_DIR="$SHELLSTATD_HOME/metric.d"
    for METRIC in $metrics
    do
+      echo "Found Metric Script: $METRIC"
       $SCRIPT_DIR/$METRIC.sh $CONFIG_FILE &
       echo $! >> $PID_FILE
    done
