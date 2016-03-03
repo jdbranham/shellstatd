@@ -18,11 +18,22 @@ function repeat {
 CONFIG_FILE=$1
 . $CONFIG_FILE
 HOSTNAME=$(hostname -s)
+
+
 . $SHELLSTATD_HOME/lib/graphite_send.sh
-JSON_SEPARATOR=.
+echo "Imported $SHELLSTATD_HOME/lib/graphite_send.sh"
+
+JSON_SEPARATOR=\.
+echo "Set JSON_SEPARATOR=$JSON_SEPARATOR"
+
 . $SHELLSTATD_HOME/lib/json_parse.sh
+echo "Imported $SHELLSTATD_HOME/lib/json_parse.sh"
+
 JOLOKIA_URLS=$SHELLSTATD_HOME/conf/jolokia.conf
+echo "Imported $SHELLSTATD_HOME/conf/jolokia.conf"
+
 . $SHELLSTATD_HOME/lib/jolokia_request.sh
+echo "Imported $SHELLSTATD_HOME/lib/jolokia_request.sh"
 
 echo "Launching jolokia monitoring, reporting data to $graphite_host"
 repeat "exec 4<$JOLOKIA_URLS; \
