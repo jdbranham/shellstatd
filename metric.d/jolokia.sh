@@ -19,7 +19,6 @@ CONFIG_FILE=$1
 . $CONFIG_FILE
 HOSTNAME=$(hostname -s)
 
-echo "Importing $SHELLSTATD_HOME/lib/graphite_send.sh"
 . $SHELLSTATD_HOME/lib/graphite_send.sh
 echo "Imported $SHELLSTATD_HOME/lib/graphite_send.sh"
 
@@ -36,8 +35,5 @@ echo "Imported $SHELLSTATD_HOME/conf/jolokia.conf"
 echo "Imported $SHELLSTATD_HOME/lib/jolokia_request.sh"
 
 echo "Launching jolokia monitoring, reporting data to $graphite_host"
-repeatJolokia "exec 4<$JOLOKIA_URLS; \
-while read -u4 url ; do \
-    jolokia_request $url \
-done hostname=$HOSTNAME"
+repeatJolokia "exec 4<$JOLOKIA_URLS; while read -u4 url; do jolokia_request $url done hostname=$HOSTNAME"
  
