@@ -12,7 +12,7 @@ function repeatJolokia {
    do
       echo $1
       JSON_DEBUG=1
-      $1 | json | cat
+      $1 | $SHELLSTATD_HOME/lib/JSON.sh
       sleep $graphite_interval_seconds
    done
 }
@@ -26,9 +26,6 @@ echo "Imported $SHELLSTATD_HOME/lib/graphite_send.sh"
 
 #JSON_SEPARATOR="."
 echo "Set JSON_SEPARATOR=$JSON_SEPARATOR"
-
-. $SHELLSTATD_HOME/lib/json_parse.sh
-echo "Imported $SHELLSTATD_HOME/lib/json_parse.sh"
 
 . $SHELLSTATD_HOME/lib/jolokia_request.sh
 echo "Imported $SHELLSTATD_HOME/lib/jolokia_request.sh"
