@@ -6,10 +6,13 @@
 # or a single value format -
 # {"request":{"mbean":"java.lang:name=ParNew,type=GarbageCollector","attribute":"CollectionTime","type":"read"},"value":177657,"timestamp":1456952949,"status":200}
 
+function jolokiaRequest { 
+  while IFS= read -r line; do
+  	curl $line
+  done
+}
 
 function repeatJolokia {
-   . $SHELLSTATD_HOME/lib/jolokia_request.sh
-   echo "Imported $SHELLSTATD_HOME/lib/jolokia_request.sh"
    while true
    do
       echo "$1" | /bin/bash 
