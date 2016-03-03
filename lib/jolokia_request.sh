@@ -25,7 +25,7 @@ function extractMBeanName {
    local MBEAN="`egrep $MATCH_BEAN $TEMP_FILE`"
    echo -e "First - $MBEAN\n"
    MBEAN="${MBEAN/$MATCH_BEAN/$HOSTNAME}" 
-   MBEAN="${MBEAN/$MATCH_REMOVE/.}" 
+   MBEAN="${MBEAN//$MATCH_REMOVE/.}" 
    echo -e "Second: $MBEAN\n"
    echo $MBEAN | sed -r 's/[\ ]//g' 
    # $MBEAN=${MBEAN/\'MATCH_BEANTYPE\'/\.}
