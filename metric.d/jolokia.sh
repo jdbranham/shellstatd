@@ -23,7 +23,7 @@ echo "Importing $SHELLSTATD_HOME/lib/graphite_send.sh"
 . $SHELLSTATD_HOME/lib/graphite_send.sh
 echo "Imported $SHELLSTATD_HOME/lib/graphite_send.sh"
 
-JSON_SEPARATOR=\.
+JSON_SEPARATOR="."
 echo "Set JSON_SEPARATOR=$JSON_SEPARATOR"
 
 . $SHELLSTATD_HOME/lib/json_parse.sh
