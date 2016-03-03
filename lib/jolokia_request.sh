@@ -4,7 +4,7 @@ function jolokiaRequest {
    while read -u 3 LINE
    do
        # do something with ${LINE}
-       echo ${LINE}
+       curl ${LINE}
    done
    # close file
    exec 3<&-    
