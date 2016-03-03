@@ -9,6 +9,7 @@
 
 function repeatJolokia {
    . $SHELLSTATD_HOME/lib/jolokia_request.sh
+   echo "Imported $SHELLSTATD_HOME/lib/jolokia_request.sh"
    while true
    do
       echo "$1" | /bin/bash 
@@ -31,9 +32,6 @@ echo "Imported $SHELLSTATD_HOME/lib/json_parse.sh"
 
 JOLOKIA_URLS=$SHELLSTATD_HOME/conf/jolokia.conf
 echo "Imported $SHELLSTATD_HOME/conf/jolokia.conf"
-
-. $SHELLSTATD_HOME/lib/jolokia_request.sh
-echo "Imported $SHELLSTATD_HOME/lib/jolokia_request.sh"
 
 echo "Launching jolokia monitoring, reporting data to $graphite_host"
 repeatJolokia "jolokiaRequest $JOLOKIA_URLS SHELLSTATD_HOME=$SHELLSTATD_HOME"
