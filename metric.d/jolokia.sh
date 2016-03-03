@@ -12,7 +12,7 @@ function repeatJolokia {
    do
       echo $1
       JSON_DEBUG=1
-      $1 | $SHELLSTATD_HOME/lib/JSON.sh
+      $1
       sleep $graphite_interval_seconds
    done
 }
@@ -34,5 +34,5 @@ JOLOKIA_URLS=$SHELLSTATD_HOME/conf/jolokia.conf
 echo "Imported $SHELLSTATD_HOME/conf/jolokia.conf"
 
 echo "Launching jolokia monitoring, reporting data to $graphite_host"
-repeatJolokia "jolokiaRequest $JOLOKIA_URLS"
+repeatJolokia "jolokiaRequest $JOLOKIA_URLS /tmp/tmp.jolokia_requests"
  
