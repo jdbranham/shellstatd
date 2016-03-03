@@ -54,6 +54,7 @@ echo >> $CONFIG
 # copy bits to new dir
 rsync -av * $INSTALL_DIR --exclude ".svn" --exclude ".gitignore" --exclude="install.sh"
 cat conf/shellstatd.starter.conf >> $CONFIG
+touch $INSTALL_DIR/conf/jolokia.conf
 cp shellstatd $INIT_DIR
 
 echo "graphite_host=\"$GRAPHITE_HOST\"" >> $CONFIG
