@@ -7,7 +7,7 @@
 # {"request":{"mbean":"java.lang:name=ParNew,type=GarbageCollector","attribute":"CollectionTime","type":"read"},"value":177657,"timestamp":1456952949,"status":200}
 
 
-function repeat {
+function repeatJolokia {
    while true
    do
       echo "$1" | /bin/bash 
@@ -19,7 +19,7 @@ CONFIG_FILE=$1
 . $CONFIG_FILE
 HOSTNAME=$(hostname -s)
 
-
+echo "Importing $SHELLSTATD_HOME/lib/graphite_send.sh"
 . $SHELLSTATD_HOME/lib/graphite_send.sh
 echo "Imported $SHELLSTATD_HOME/lib/graphite_send.sh"
 
@@ -36,7 +36,7 @@ echo "Imported $SHELLSTATD_HOME/conf/jolokia.conf"
 echo "Imported $SHELLSTATD_HOME/lib/jolokia_request.sh"
 
 echo "Launching jolokia monitoring, reporting data to $graphite_host"
-repeat "exec 4<$JOLOKIA_URLS; \
+repeatJolokia "exec 4<$JOLOKIA_URLS; \
 while read -u4 url ; do \
     jolokia_request $url \
 done hostname=$HOSTNAME"
