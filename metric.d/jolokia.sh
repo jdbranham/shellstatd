@@ -10,7 +10,7 @@
 function repeatJolokia {
    while true
    do
-      $1 | json
+      json < ($1)
       sleep $graphite_interval_seconds
    done
 }
