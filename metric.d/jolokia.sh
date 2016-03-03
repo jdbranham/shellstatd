@@ -35,5 +35,5 @@ echo "Imported $SHELLSTATD_HOME/conf/jolokia.conf"
 echo "Imported $SHELLSTATD_HOME/lib/jolokia_request.sh"
 
 echo "Launching jolokia monitoring, reporting data to $graphite_host"
-repeatJolokia "while read url; do jolokia_request $url; done <$JOLOKIA_URLS hostname=$HOSTNAME"
+repeatJolokia "while read url; do jolokia_request $url; done <$JOLOKIA_URLS"
  
