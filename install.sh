@@ -53,6 +53,7 @@ echo >> $CONFIG
 
 # copy bits to new dir
 rsync -av * $INSTALL_DIR --exclude ".svn" --exclude ".gitignore" --exclude="install.sh"
+chmod +x $INSTALL_DIR/metric.d/*
 cat conf/shellstatd.starter.conf >> $CONFIG
 touch $INSTALL_DIR/conf/jolokia.conf
 cp shellstatd $INIT_DIR
