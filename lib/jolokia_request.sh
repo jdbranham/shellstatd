@@ -25,6 +25,6 @@ function extractMBeanName {
    echo -e "First - $MBEAN\n"
    MBEAN="${MBEAN/$MATCH_BEAN/$HOSTNAME}" 
    echo -e "Second: $MBEAN\n"
-   echo $MBEAN | sed -r 's/[ ,":type",":name",=,\"]//g' 
+   echo $MBEAN | sed -r 's/[\ ]//g' 
    # $MBEAN=${MBEAN/\'MATCH_BEANTYPE\'/\.}
 }
