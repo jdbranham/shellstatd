@@ -8,7 +8,7 @@ function jolokiaRequest {
       local TEMP_FILE=(mktemp)
       # do something with ${LINE}
       curl -s ${LINE} | $SHELLSTATD_HOME/lib/JSON.sh -b > $TEMP_FILE
-      local MBEAN_NAME=extractMBeanName $TEMP_FILE
+      local MBEAN_NAME=`extractMBeanName $TEMP_FILE`
       rm $TEMP_FILE
       echo $MBEAN_NAME
    done
