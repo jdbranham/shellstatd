@@ -10,8 +10,8 @@ function jolokiaRequest {
        curl -s ${LINE} | $SHELLSTATD_HOME/lib/JSON.sh -b > $TEMP_FILE | egrep '\["value"\]'
        local MBEAN=`egrep $MATCH_BEAN $TEMP_FILE`
        echo $MBEAN
-       $MBEAN=${MBEAN/MATCH_BEAN/HOSTNAME}
-       $MBEAN=${MBEAN/MATCH_BEANTYPE/\.}
+       $MBEAN=${MBEAN/'MATCH_BEAN'/HOSTNAME}
+       $MBEAN=${MBEAN/'MATCH_BEANTYPE'/\.}
        echo $MBEAN
    done
    # close file
