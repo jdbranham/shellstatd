@@ -12,8 +12,7 @@ function jolokiaRequest {
       curl -s ${LINE} | $SHELLSTATD_HOME/lib/JSON.sh -b > $TEMP_FILE
       local MBEAN_NAME=`extractMBeanName $TEMP_FILE`
       rm $TEMP_FILE
-      echo -e "$MBEAN_NAME\n
-      echo .
+      echo -e "$MBEAN_NAME\n"
    done
    # close file
    exec 3<&-
