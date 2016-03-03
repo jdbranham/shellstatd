@@ -5,10 +5,10 @@ function jolokiaRequest {
    while read -u 3 LINE
    do
        # do something with ${LINE}
-       curl -s ${LINE} > $tmpfile
+       curl -s ${LINE} | $SHELLSTATD_HOME/lib/JSON.sh
    done
    # close file
    exec 3<&-    
-   $SHELLSTATD_HOME/lib/JSON.sh $tmpfile
+    $tmpfile
    rm $tmpfile
 }
