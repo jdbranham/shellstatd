@@ -21,11 +21,10 @@ function jolokiaRequest {
 function extractMBeanName {
    local TEMP_FILE=$1
    local MATCH_BEAN='\["request","mbean"\]'
-   #local MATCH_REMOVE="['\:type','\:name','\=',\",' ']"
    local MBEAN="`egrep $MATCH_BEAN $TEMP_FILE`"
    echo -e "First - $MBEAN\n"
    MBEAN="${MBEAN/$MATCH_BEAN/$HOSTNAME}" 
    echo -e "Second: $MBEAN\n"
-   echo $MBEAN | sed -r 's/ //g' 
+   echo $MBEAN | sed -r 's/[ ,:type,:name,=]//g' 
    # $MBEAN=${MBEAN/\'MATCH_BEANTYPE\'/\.}
 }
