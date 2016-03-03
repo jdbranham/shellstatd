@@ -3,7 +3,7 @@ function jolokiaRequest {
    exec 3<$1
    TEMP_FILE=(mktemp)
    MATCH_BEAN='\["request","mbean"\]'
-   MATCH_BEANTYPE=':type='
+   MATCH_BEANTYPE='\:type\='
    while read -u 3 LINE
    do
        # do something with ${LINE}
