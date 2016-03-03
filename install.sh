@@ -52,10 +52,10 @@ echo "PID_FILE=\"$PID_FILE\"" >> $CONFIG
 echo >> $CONFIG
 
 # copy bits to new dir
-cp -r awk $INSTALL_DIR
-cp -r metric.d $INSTALL_DIR
-cp -r lib $INSTALL_DIR
-cp -r conf $INSTALL_DIR
+cp -r awk $INSTALL_DIR --exclude ".svn" --exclude ".gitignore"
+cp -r metric.d $INSTALL_DIR --exclude ".svn" --exclude ".gitignore"
+cp -r lib $INSTALL_DIR --exclude ".svn" --exclude ".gitignore"
+cp -r conf $INSTALL_DIR --exclude ".svn" --exclude ".gitignore"
 cat conf/shellstatd.starter.conf >> $CONFIG
 cp shellstatd $INIT_DIR
 
