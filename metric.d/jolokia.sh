@@ -10,7 +10,7 @@
 function repeatJolokia {
    while true
    do
-      echo "($1)"
+      $1
       sleep $graphite_interval_seconds
    done
 }
@@ -35,5 +35,5 @@ JOLOKIA_URLS=$SHELLSTATD_HOME/conf/jolokia.conf
 echo "Imported $SHELLSTATD_HOME/conf/jolokia.conf"
 
 echo "Launching jolokia monitoring, reporting data to $graphite_host"
-repeatJolokia "jolokiaRequest $JOLOKIA_URLS SHELLSTATD_HOME=$SHELLSTATD_HOME"
+repeatJolokia "jolokiaRequest $JOLOKIA_URLS"
  
