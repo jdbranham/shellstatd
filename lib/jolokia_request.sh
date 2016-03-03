@@ -23,7 +23,7 @@ function extractMBeanName {
    local MATCH_BEAN='\["request","mbean"\]'
    local MATCH_BEANTYPE='\:type\='
    local MBEAN="`egrep $MATCH_BEAN $TEMP_FILE`"
-   MBEAN="${MBEAN/$MATCH_BEAN/$HOSTNAME} | sed 's|$MATCH_BEANTYPE|'"
+   MBEAN="${MBEAN/$MATCH_BEAN/$HOSTNAME}" | sed 's|$MATCH_BEANTYPE|' | sed 's|[\", ]||'
    echo $MBEAN
    # $MBEAN=${MBEAN/\'MATCH_BEANTYPE\'/\.}
 }
