@@ -20,7 +20,7 @@ do
    if [ "$ERROR" == "" ] then
       echo "Not a valid option: $ERROR"
       exit 1
-   if
+   fi
 done
 
 if [ -f "$CONFIG_FILE" ] then
