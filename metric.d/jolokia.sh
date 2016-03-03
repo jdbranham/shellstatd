@@ -12,7 +12,7 @@ function repeatJolokia {
    do
       echo $1
       JSON_DEBUG=1
-      {$1} | json | cat
+      $1 | json | cat
       sleep $graphite_interval_seconds
    done
 }
