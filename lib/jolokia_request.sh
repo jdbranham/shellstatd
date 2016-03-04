@@ -19,6 +19,18 @@ function jolokiaRequest {
       echo -e "MBEAN_ATTRIBUTE: $MBEAN_ATTRIBUTE\n"
       echo -e "MBEAN_VALUE: $MBEAN_VALUE\n"
       echo -e "MBEAN_TIMESTAMP: $MBEAN_TIMESTAMP\n"
+      
+      local PAYLOAD=()
+      case $MBEAN_VALUE in
+         # The value is not a number
+         ''|*[!0-9]*) 
+            while read -r value_entry; do
+               $PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $value_entry $MBEAN_TIMESTAMP")
+            done < <(MBEAN_VALUE) ;;
+         # The value must be a number
+         *) 
+            $PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP") ;;
+      esac
    done
    # close file
    exec 3<&-
