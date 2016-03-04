@@ -54,7 +54,7 @@ function extractMBeanName {
    MBEAN="${MBEAN//':type'/}" 
    MBEAN="${MBEAN//':name'/}" 
    #echo -e "Second: $MBEAN\n"
-   echo $MBEAN | sed -r 's/\ //g;s/[=,\"]/./g' 
+   echo $MBEAN | sed -r 's/\ //g;s/[=,\"]/./g' | awk '{print $1}'
 }
 
 function extractMBeanAttribute {
