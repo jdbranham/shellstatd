@@ -50,7 +50,7 @@ echo "   LOG: $INSTALL_DIR/log/graphite.log"
 
 echo "SHELLSTATD_HOME=\"$INSTALL_DIR\"" > $CONFIG
 echo "PID_FILE=\"$PID_FILE\"" >> $CONFIG
-echo "LOG=\"$INSTALL_DIR\"/log/graphite.log >> $CONFIG
+echo "LOG=\"$INSTALL_DIR\"/log/graphite.log" >> $CONFIG
 echo >> $CONFIG
 
 # copy bits to new dir
