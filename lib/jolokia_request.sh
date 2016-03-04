@@ -23,15 +23,18 @@ function jolokiaRequest {
       case $MBEAN_VALUE in
          # The value is not a number
          ''|*[!0-9]*) 
-            while read -r value_entry
-            do
-               local full_string="$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP\n"
-               PAYLOAD+=("${full_string}")
+            while read -r value_entry; do
+               if [! "$value_entry" = "" ]; then
+                  local full_string="$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP\n"
+                  PAYLOAD+=("${full_string}")
+               fi
             done < <(echo "$MBEAN_VALUE") ;;
          # The value must be a number
          *) 
-            local full_string="$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP\n"
-            PAYLOAD+=("${full_string}") ;;
+            if [! "$value_entry" = "" ]; then
+               local full_string="$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP\n"
+               PAYLOAD+=("${full_string}") 
+            fi;;
       esac
       for payload_item in "${PAYLOAD[*]}"; do
          echo -e "$payload_item"
