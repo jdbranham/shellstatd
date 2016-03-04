@@ -32,7 +32,8 @@ then
    echo "Usage: install.sh <install dir> <graphite host> <monitor interval seconds> [ graphite port (default=2003) ]"
    exit 1
 fi
-mkdir -p $INSTALL_DIR
+mkdir -p $INSTALL_DIR/log
+mkdir -p $INSTALL_DIR/conf
 if [ "$GRAPHITE_PORT" == "" ]
 then
    GRAPHITE_PORT=$DEFAULT_GRAPHITE_PORT
