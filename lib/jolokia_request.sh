@@ -12,7 +12,7 @@ function jolokiaRequest {
       curl -s ${LINE} | $SHELLSTATD_HOME/lib/JSON.sh -b > $TEMP_FILE
       local MBEAN_NAME=`extractMBeanName $TEMP_FILE`
       local MBEAN_ATTRIBUTE=`extractMBeanAttribute $TEMP_FILE`
-      #local MBEAN_VALUE=`extractMBeanValue $TEMP_FILE`
+      local MBEAN_VALUE=`extractMBeanValue $TEMP_FILE`
       local MBEAN_TIMESTAMP=`extractMBeanTimestamp $TEMP_FILE`
       rm $TEMP_FILE
       echo -e "MBEAN_NAME: $MBEAN_NAME\n"
@@ -49,9 +49,10 @@ function extractMBeanValue {
    local MATCH='\["value"'
    local MBEAN="`egrep $MATCH $TEMP_FILE`"
    MBEAN="${MBEAN//'value'/}" 
-   for m in $( MBEAN ); do
-      echo $m | sed 's/[\[,\],\"]//g' awk '{print $1, $2}'
-   done
+   echo $MBEAN
+   #for m in $( MBEAN ); do
+   #   echo $m | sed 's/[\[,\],\"]//g' awk '{print $1, $2}'
+   #done
 }
 
 function extractMBeanTimestamp {
