@@ -41,11 +41,11 @@ function jolokiaRequest {
    exec 3<&-
 }
 
-function getEachMbeanValue { 
-  while IFS= read -r line; do
-    PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $line $MBEAN_TIMESTAMP")
-  done
-}
+#function getEachMbeanValue { 
+#  while IFS= read -r line; do
+#    PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $line $MBEAN_TIMESTAMP")
+#  done
+#}
 
 function extractMBeanName {
    local TEMP_FILE=$1
@@ -56,7 +56,7 @@ function extractMBeanName {
    MBEAN="${MBEAN//':type'/}" 
    MBEAN="${MBEAN//':name'/}" 
    #echo -e "Second: $MBEAN\n"
-   echo $MBEAN | sed -r 's/[\ ]//g;s/[=,\"]/./g' 
+   echo $MBEAN | sed -rn 's/[\ ]//g;s/[=,\"]/./g/p' 
    # $MBEAN=${MBEAN/\'MATCH_BEANTYPE\'/\.}
 }
 
