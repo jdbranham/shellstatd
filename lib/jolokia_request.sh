@@ -34,7 +34,7 @@ function jolokiaRequest {
       esac
       for payload_item in $(PAYLOAD[*]); do
          printf "%s\n" $payload_item
-      #echo -e $PAYLOAD
+      done
    done
    # close file
    exec 3<&-
