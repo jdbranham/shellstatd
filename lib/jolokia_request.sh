@@ -32,7 +32,7 @@ function jolokiaRequest {
             PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP\n") ;;
       esac
       for payload_item in ${PAYLOAD[*]}; do
-         printf "%s" $payload_item
+         echo -e $payload_item
       done
    done
    # close file
@@ -55,7 +55,7 @@ function extractMBeanAttribute {
    local TEMP_FILE=$1
    local MATCH='\["request","attribute"\]'
    local MBEAN="`egrep $MATCH $TEMP_FILE`"
-   echo $MBEAN | awk '{print $2}'
+   echo $MBEAN | awk '{print $2}' | sed 's/\"//g'
 }
 
 function extractMBeanValue {
