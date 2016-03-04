@@ -26,11 +26,11 @@ function jolokiaRequest {
          ''|*[!0-9]*) 
             while read -r value_entry
             do
-               PAYLOAD+=({echo -e "$MBEAN_NAME $MBEAN_ATTRIBUTE $value_entry $MBEAN_TIMESTAMP\n"})
+               PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $value_entry $MBEAN_TIMESTAMP\n")
             done < <(echo "$MBEAN_VALUE") ;;
          # The value must be a number
          *) 
-            PAYLOAD+=({echo -e "$MBEAN_NAME $MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP\n"}) ;;
+            PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP\n") ;;
       esac
       #while read -r payload_entry; do
       #   echo $payload_entry
