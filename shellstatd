@@ -17,7 +17,7 @@ while getopts :c option
 do 
    case "${option}" in 
       c) CONFIG_FILE=${OPTARG};; 
-      l) LOG_FILE=${OPTARG}
+      l) LOG_FILE=${OPTARG};;
       ?) ERROR=${OPTARG};;
    esac
    if [ "$ERROR" == "" ] 
