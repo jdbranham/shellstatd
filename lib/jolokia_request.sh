@@ -32,7 +32,8 @@ function jolokiaRequest {
          *) 
             PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP") ;;
       esac
-      echo $PAYLOAD
+      echo - "Payload:"
+      echo -e $PAYLOAD
    done
    # close file
    exec 3<&-
@@ -48,11 +49,11 @@ function extractMBeanName {
    local TEMP_FILE=$1
    local MATCH='\["request","mbean"\]'
    local MBEAN="`egrep $MATCH_BEAN $TEMP_FILE`"
-   echo -e "First - $MBEAN\n"
+   #echo -e "First - $MBEAN\n"
    MBEAN="${MBEAN/$MATCH/$HOSTNAME}" 
    MBEAN="${MBEAN//':type'/}" 
    MBEAN="${MBEAN//':name'/}" 
-   echo -e "Second: $MBEAN\n"
+   #echo -e "Second: $MBEAN\n"
    echo $MBEAN | sed -r 's/[\ ]//g;s/[=,\"]/./g' 
    # $MBEAN=${MBEAN/\'MATCH_BEANTYPE\'/\.}
 }
