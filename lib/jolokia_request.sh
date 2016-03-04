@@ -32,7 +32,7 @@ function jolokiaRequest {
                local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP\n"
                PAYLOAD+=("${full_string}")
             fi
-         done < <(echo "$MBEAN_VALUE")
+         done < <(echo -e "$MBEAN_VALUE")
       fi
       for payload_item in "${PAYLOAD[*]}"; do
          echo -e "$payload_item"
