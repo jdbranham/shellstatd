@@ -24,7 +24,8 @@ function jolokiaRequest {
       case $MBEAN_VALUE in
          # The value is not a number
          ''|*[!0-9]*) 
-            while read -r value_entry; do
+            while read -r value_entry
+            do
                $PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $value_entry $MBEAN_TIMESTAMP")
             done < <(MBEAN_VALUE) ;;
          # The value must be a number
