@@ -33,7 +33,7 @@ function jolokiaRequest {
             local full_string="$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP"
             PAYLOAD+=("${full_string}") ;;
       esac
-      for payload_item in ${PAYLOAD[*]}; do
+      for payload_item in "${PAYLOAD[*]}"; do
          echo -e "$payload_item\n"
       done
    done
