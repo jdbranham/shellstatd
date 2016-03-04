@@ -7,6 +7,7 @@ function jolokiaRequest {
    exec 3<$1
    while read -u 3 LINE
    do
+      local PREFIX="servers."
       local TEMP_FILE=(mktemp)
       curl -s ${LINE} | $SHELLSTATD_HOME/lib/JSON.sh -b -n > $TEMP_FILE
       local MBEAN_NAME=`extractMBeanName $TEMP_FILE`
@@ -25,14 +26,14 @@ function jolokiaRequest {
          ''|*[!0-9]*) 
             while read -r value_entry; do
                if [ ! "$value_entry" = "" ]; then
-                  local full_string="$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP\n"
+                  local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP\n"
                   PAYLOAD+=("${full_string}")
                fi
             done < <(echo "$MBEAN_VALUE") ;;
          # The value must be a number
          *) 
             if [ ! "$MBEAN_VALUE" = "" ]; then
-               local full_string="$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP\n"
+               local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP\n"
                PAYLOAD+=("${full_string}") 
             fi;;
       esac
@@ -53,7 +54,7 @@ function extractMBeanName {
    MBEAN="${MBEAN//':type'/}" 
    MBEAN="${MBEAN//':name'/}" 
    #echo -e "Second: $MBEAN\n"
-   echo $MBEAN | sed -r 's/[\ ]//g;s/[=,\"]/./g' 
+   echo $MBEAN | sed -r 's/\ //g;s/[=,\"]/./g' 
 }
 
 function extractMBeanAttribute {
