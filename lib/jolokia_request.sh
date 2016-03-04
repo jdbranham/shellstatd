@@ -81,5 +81,5 @@ function extractMBeanTimestamp {
    local TEMP_FILE=$1
    local MATCH='\["timestamp"\]'
    local MBEAN="`egrep $MATCH $TEMP_FILE`"
-   echo $MBEAN | awk '{ print $2 } | sed -r '/^\s*$/d'
+   echo $MBEAN | awk '{ print $2 }' | sed -r '/^\s*$/d'
 }
