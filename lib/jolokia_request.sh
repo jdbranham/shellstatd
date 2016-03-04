@@ -27,7 +27,7 @@ function jolokiaRequest {
             while read -r value_entry
             do
                PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $value_entry $MBEAN_TIMESTAMP")
-            done < (getEachMbeanValue $MBEAN_VALUE) ;;
+            done < {getEachMbeanValue $MBEAN_VALUE} ;;
          # The value must be a number
          *) 
             PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP") ;;
