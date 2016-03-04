@@ -66,7 +66,7 @@ function extractMBeanValue {
    local MATCH='\["value"'
    local MBEAN="`egrep $MATCH $TEMP_FILE`"
    MBEAN="${MBEAN//'value'/}" 
-   local MBEAN_VALUE=${echo $MBEAN | sed -r 's/\,//g;s/\[//g;s/\]//g;s/\"//g'}
+   local MBEAN_VALUE=`echo $MBEAN | sed -r 's/\,//g;s/\[//g;s/\]//g;s/\"//g'`
    local regexNumber='^[0-9]+'
       if [[ "$MBEAN_VALUE" =~ $regexNumber ]]; then
          # The value is a number
