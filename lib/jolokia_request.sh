@@ -32,8 +32,9 @@ function jolokiaRequest {
          *) 
             PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP") ;;
       esac
-      echo - "Payload:"
-      echo "$PAYLOAD"
+      while read -r payload_entry; do
+         echo $payload_entry
+      done < <(echo "$PAYLOAD")
    done
    # close file
    exec 3<&-
