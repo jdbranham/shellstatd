@@ -51,11 +51,7 @@ fi
 . $CONFIG_FILE
 
 if [ ! -f "$LOG_FILE" ]; then
-   if [ ! -f "$LOG" ]; then
-      LOG_FILE=$LOG
-   else
-      LOG_FILE=$SHELLSTATD_HOME/shellstatd.log
-   fi
+   LOG_FILE=$LOG
 fi
 
 function start() {

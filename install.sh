@@ -46,9 +46,11 @@ echo "   GRAPHITE_PORT: $GRAPHITE_PORT"
 echo "   CONFIG: $CONFIG"
 echo "   PID_FILE: $PID_FILE"
 echo "   INIT_DIR: $INIT_DIR"
+echo "   LOG: $INSTALL_DIR/log/graphite.log"
 
 echo "SHELLSTATD_HOME=\"$INSTALL_DIR\"" > $CONFIG
 echo "PID_FILE=\"$PID_FILE\"" >> $CONFIG
+echo "LOG=\"$INSTALL_DIR\"/log/graphite.log >> $CONFIG
 echo >> $CONFIG
 
 # copy bits to new dir
@@ -58,6 +60,7 @@ chmod +x $INSTALL_DIR/lib/*
 cat conf/shellstatd.starter.conf >> $CONFIG
 touch $INSTALL_DIR/conf/jolokia.conf
 cp shellstatd $INIT_DIR
+mkdir -p $INSTALL_DIR/log
 
 echo "graphite_host=\"$GRAPHITE_HOST\"" >> $CONFIG
 echo "graphite_port=\"$GRAPHITE_PORT\"" >> $CONFIG
