@@ -66,7 +66,7 @@ function extractMBeanValue {
    local MATCH='\["value"'
    local MBEAN="`egrep $MATCH $TEMP_FILE`"
    MBEAN="${MBEAN//'value'/}" 
-   echo $MBEAN | sed -r 's/\,//g;s/\[//g;s/\]//g;s/\"//g;s/[0-9]+/&\n/g' | awk '{print $1, $2}'
+   echo $MBEAN | sed -r 's/\,//g;s/\[//g;s/\]//g;s/\"//g;s/[0-9]+/&\n/g;/^\s*$/d' | awk '{print $1, $2}'
 }
 
 function extractMBeanTimestamp {
