@@ -17,7 +17,7 @@ function jolokiaRequest {
       rm $TEMP_FILE
       #echo -e "MBEAN_NAME: $MBEAN_NAME\n"
       #echo -e "MBEAN_ATTRIBUTE: $MBEAN_ATTRIBUTE\n"
-      #echo -e "MBEAN_VALUE: $MBEAN_VALUE\n"
+      echo -e "MBEAN_VALUE: $MBEAN_VALUE\n"
       #echo -e "MBEAN_TIMESTAMP: $MBEAN_TIMESTAMP\n"
       
       local PAYLOAD=()
