@@ -26,14 +26,14 @@ function jolokiaRequest {
          ''|*[!0-9]*) 
             while read -r value_entry
             do
-               PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $value_entry $MBEAN_TIMESTAMP")
+               PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $value_entry $MBEAN_TIMESTAMP\n")
             done < <(echo "$MBEAN_VALUE") ;;
          # The value must be a number
          *) 
-            PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP") ;;
+            PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP\n") ;;
       esac
       for payload_item in ${PAYLOAD[*]}; do
-         printf "%s\n" $payload_item
+         printf "%s" $payload_item
       done
    done
    # close file
