@@ -22,7 +22,7 @@ function jolokiaRequest {
       
       local PAYLOAD=()
       local regexNumber='^[0-9]+([.][0-9]+)?$'
-      if [ ! "$MBEAN_VALUE" ~= $regexNumber ]]; then
+      if [[ "$MBEAN_VALUE" ~= $regexNumber ]]; then
          # The value is a number
          local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP\n"
          PAYLOAD+=("${full_string}") 
