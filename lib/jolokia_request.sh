@@ -34,7 +34,7 @@ function jolokiaRequest {
             PAYLOAD+=("${full_string}") ;;
       esac
       for payload_item in "${PAYLOAD[*]}"; do
-         echo "$payload_item"
+         echo -e "$payload_item"
       done
    done
    # close file
