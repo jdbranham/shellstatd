@@ -10,7 +10,7 @@
 function repeatJolokia {
    while true
    do
-      $1
+      $1 | sendToGraphite
       sleep $graphite_interval_seconds
    done
 }
