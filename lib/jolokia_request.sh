@@ -21,7 +21,7 @@ function jolokiaRequest {
       #echo -e "MBEAN_TIMESTAMP: $MBEAN_TIMESTAMP\n"
       
       local PAYLOAD=()
-      local regexNumber='[0-9]+([.][0-9]+)?$'
+      local regexNumber='^[0-9]+'
       if [[ "$MBEAN_VALUE" =~ $regexNumber ]]; then
          # The value is a number
          local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP\n"
