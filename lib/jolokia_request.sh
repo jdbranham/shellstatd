@@ -8,17 +8,16 @@ function jolokiaRequest {
    while read -u 3 LINE
    do
       local TEMP_FILE=(mktemp)
-      # do something with ${LINE}
       curl -s ${LINE} | $SHELLSTATD_HOME/lib/JSON.sh -b > $TEMP_FILE
       local MBEAN_NAME=`extractMBeanName $TEMP_FILE`
       local MBEAN_ATTRIBUTE=`extractMBeanAttribute $TEMP_FILE`
       local MBEAN_VALUE=`extractMBeanValue $TEMP_FILE`
       local MBEAN_TIMESTAMP=`extractMBeanTimestamp $TEMP_FILE`
       rm $TEMP_FILE
-      echo -e "MBEAN_NAME: $MBEAN_NAME\n"
-      echo -e "MBEAN_ATTRIBUTE: $MBEAN_ATTRIBUTE\n"
-      echo -e "MBEAN_VALUE: $MBEAN_VALUE\n"
-      echo -e "MBEAN_TIMESTAMP: $MBEAN_TIMESTAMP\n"
+      #echo -e "MBEAN_NAME: $MBEAN_NAME\n"
+      #echo -e "MBEAN_ATTRIBUTE: $MBEAN_ATTRIBUTE\n"
+      #echo -e "MBEAN_VALUE: $MBEAN_VALUE\n"
+      #echo -e "MBEAN_TIMESTAMP: $MBEAN_TIMESTAMP\n"
       
       local PAYLOAD=()
       case $MBEAN_VALUE in
@@ -40,12 +39,6 @@ function jolokiaRequest {
    exec 3<&-
 }
 
-#function getEachMbeanValue { 
-#  while IFS= read -r line; do
-#    PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $line $MBEAN_TIMESTAMP")
-#  done
-#}
-
 function extractMBeanName {
    local TEMP_FILE=$1
    local MATCH='\["request","mbean"\]'
@@ -56,7 +49,6 @@ function extractMBeanName {
    MBEAN="${MBEAN//':name'/}" 
    #echo -e "Second: $MBEAN\n"
    echo $MBEAN | sed -r 's/[\ ]//g;s/[=,\"]/./g' 
-   # $MBEAN=${MBEAN/\'MATCH_BEANTYPE\'/\.}
 }
 
 function extractMBeanAttribute {
