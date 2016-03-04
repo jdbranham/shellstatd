@@ -32,7 +32,7 @@ function jolokiaRequest {
          *) 
             PAYLOAD+=("$MBEAN_NAME $MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP") ;;
       esac
-      for payload_item in $(PAYLOAD[*]); do
+      for payload_item in ${PAYLOAD[*]}; do
          printf "%s\n" $payload_item
       done
    done
