@@ -60,6 +60,7 @@ chmod +x $INSTALL_DIR/metric.d/*
 chmod +x $INSTALL_DIR/lib/*
 cat conf/shellstatd.starter.conf >> $CONFIG
 touch $INSTALL_DIR/conf/jolokia.conf
+touch $INSTALL_DIR/log/graphite.log
 cp shellstatd $INIT_DIR
 mkdir -p $INSTALL_DIR/log
 
