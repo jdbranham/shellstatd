@@ -8,6 +8,7 @@ then
    echo .
    echo "Options:"
    echo "-c    Configuration File Location"
+   echo "-l    Log File Location"
    echo .
    exit 1
 fi
@@ -16,6 +17,7 @@ while getopts :c option
 do 
    case "${option}" in 
       c) CONFIG_FILE=${OPTARG};; 
+      l) LOG_FILE=${OPTARG}
       ?) ERROR=${OPTARG};;
    esac
    if [ "$ERROR" == "" ] 
@@ -48,6 +50,13 @@ fi
 
 . $CONFIG_FILE
 
+if [ ! -f "$LOG_FILE" ]; then
+   if [ ! -f "$LOG" ]; then
+      LOG_FILE=$LOG
+   else
+      LOG_FILE=$SHELLSTATD_HOME/shellstatd.log
+   fi
+fi
 
 function start() {
    # check for previously running shellstatd
