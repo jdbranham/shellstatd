@@ -8,7 +8,7 @@ function jolokiaRequest {
    while read -u 3 LINE
    do
       local TEMP_FILE=(mktemp)
-      curl -s ${LINE} | $SHELLSTATD_HOME/lib/JSON.sh -b > $TEMP_FILE
+      curl -s ${LINE} | $SHELLSTATD_HOME/lib/JSON.sh -b -n > $TEMP_FILE
       local MBEAN_NAME=`extractMBeanName $TEMP_FILE`
       local MBEAN_ATTRIBUTE=`extractMBeanAttribute $TEMP_FILE`
       local MBEAN_VALUE=`extractMBeanValue $TEMP_FILE`
@@ -25,7 +25,7 @@ function jolokiaRequest {
          ''|*[!0-9]*) 
             while read -r value_entry
             do
-               local full_string="$MBEAN_NAME$MBEAN_ATTRIBUTE $value_entry $MBEAN_TIMESTAMP\n"
+               local full_string="$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP\n"
                PAYLOAD+=("${full_string}")
             done < <(echo "$MBEAN_VALUE") ;;
          # The value must be a number
