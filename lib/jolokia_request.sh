@@ -26,10 +26,10 @@ function jolokiaRequest {
 
 function extractMBeanName {
    local TEMP_FILE=$1
-   local MATCH_BEAN='\["request","mbean"\]'
+   local MATCH='\["request","mbean"\]'
    local MBEAN="`egrep $MATCH_BEAN $TEMP_FILE`"
    echo -e "First - $MBEAN\n"
-   MBEAN="${MBEAN/$MATCH_BEAN/$HOSTNAME}" 
+   MBEAN="${MBEAN/$MATCH/$HOSTNAME}" 
    MBEAN="${MBEAN//':type'/}" 
    MBEAN="${MBEAN//':name'/}" 
    echo -e "Second: $MBEAN\n"
@@ -39,15 +39,15 @@ function extractMBeanName {
 
 function extractMBeanAttribute {
    local TEMP_FILE=$1
-   local MATCH_BEAN='\["request","attribute"\]'
-   local MBEAN="`egrep $MATCH_BEAN $TEMP_FILE`"
+   local MATCH='\["request","attribute"\]'
+   local MBEAN="`egrep $MATCH $TEMP_FILE`"
    echo $MBEAN | awk '{print $2}'
 }
 
 function extractMBeanValue {
    local TEMP_FILE=$1
-   local MATCH_BEAN='\["value"'
-   local MBEAN="`egrep $MATCH_BEAN $TEMP_FILE`"
+   local MATCH='\["value"'
+   local MBEAN="`egrep $MATCH $TEMP_FILE`"
    MBEAN="${MBEAN//'value'/}" 
    for m in $( MBEAN ); do
       echo $m | sed 's/[\[,\],\"]//g' awk '{print $1, $2}'
@@ -57,6 +57,6 @@ function extractMBeanValue {
 function extractMBeanTimestamp {
    local TEMP_FILE=$1
    local MATCH='\["timestamp"\]'
-   local MBEAN="`egrep $MATCH_BEAN $TEMP_FILE`"
+   local MBEAN="`egrep $MATCH $TEMP_FILE`"
    echo $MBEAN | awk '{ print $2 }'
 }
