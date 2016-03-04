@@ -68,7 +68,7 @@ function start() {
    for METRIC in $metrics
    do
       echo "Found Metric Script: $METRIC"
-      $SCRIPT_DIR/$METRIC.sh $CONFIG_FILE &
+      $SCRIPT_DIR/$METRIC.sh $CONFIG_FILE >> $LOG_FILE &
       echo $! >> $PID_FILE
    done
 }
