@@ -6,6 +6,12 @@
 # or a single value format -
 # {"request":{"mbean":"java.lang:name=ParNew,type=GarbageCollector","attribute":"CollectionTime","type":"read"},"value":177657,"timestamp":1456952949,"status":200}
 
+CONFIG_FILE=$1
+. $CONFIG_FILE
+HOSTNAME=$(hostname -s)
+. $SHELLSTATD_HOME/lib/graphite_send.sh
+. $SHELLSTATD_HOME/lib/jolokia_request.sh
+JOLOKIA_URLS=$SHELLSTATD_HOME/conf/jolokia.conf
 
 function repeatJolokia {
 	while true
@@ -19,13 +25,6 @@ function repeatJolokia {
 		sleep $graphite_interval_seconds
 	done
 }
-
-CONFIG_FILE=$1
-. $CONFIG_FILE
-HOSTNAME=$(hostname -s)
-. $SHELLSTATD_HOME/lib/graphite_send.sh
-. $SHELLSTATD_HOME/lib/jolokia_request.sh
-JOLOKIA_URLS=$SHELLSTATD_HOME/conf/jolokia.conf
 
 echo "Launching jolokia monitoring, reporting data to $graphite_host"
 repeatJolokia "jolokiaRequest $JOLOKIA_URLS"
