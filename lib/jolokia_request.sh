@@ -37,10 +37,6 @@ function jolokiaRequest {
 			fi
 			done < <(echo -e "$MBEAN_VALUE")
 		fi
-		if [ $verbose_logging == "true" ]; then
-				echo -e "\nFull payload: " >> $LOG
-				echo -e "$PAYLOAD[*]" >> $LOG
-			fi
 		for payload_item in "${PAYLOAD[*]}"; do
 			if [ $verbose_logging == "true" ]; then
 				echo -e "Returning payload to jolokia module: " >> $LOG
