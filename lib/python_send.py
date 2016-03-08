@@ -12,6 +12,8 @@ try:
     import fcntl
 except ImportError:
 	print "INFO: fcntl module not available on Windows\n"
+	
+verbose = False
 
 def usage():
   print "Usage: [data to send] | python_send.py --server=[host/ip] [OPTION]=[value]...\n"
@@ -56,7 +58,6 @@ def main(argv):
 	socketType = socket.SOCK_DGRAM
 	sourceIp = "0.0.0.0"
 	server = False
-	global verbose = False
 	
 	try:
 		opts, args = getopt.getopt(argv, ":isp", ["interface=", "server=", "port=", "pickle=", "protocol=", "source-ip=", "verbose="])
@@ -86,7 +87,8 @@ def main(argv):
 		elif opt in ("--source-ip"):
 			sourceIp = arg
 		elif opt in ("--verbose"):
-			verbose = arg
+			global verbose
+			verbose  = arg
 	
 	if not server:
 		print "ERROR: --server is a required argument\n"
