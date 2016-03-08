@@ -7,7 +7,7 @@ function jolokiaRequest {
    exec 3<$1
    while read -u 3 LINE
    do
-      local PREFIX="servers."
+      local PREFIX=$graphite_prefix
       local TEMP_FILE=(mktemp)
       curl -s ${LINE} | $SHELLSTATD_HOME/lib/JSON.sh -b -n > $TEMP_FILE
       local MBEAN_NAME=`extractMBeanName $TEMP_FILE`
