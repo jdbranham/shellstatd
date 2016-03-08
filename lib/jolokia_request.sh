@@ -48,7 +48,7 @@ function jolokiaRequest {
 	done
 	# close file
 	exec 3<&-
-	cat $RESULT
+	echo $RESULT
 }
 
 function extractMBeanName {
