@@ -25,6 +25,7 @@ def usage():
   print "--port                   default '2003' - The port to connect to."
   print "--pickle                 default 'true if tcp' - Use the pickle protocol."
   print "--protocol               default 'udp' - Valid values are [tcp, udp]."
+  print "--verbose                default 'false' - Valid values are [True, False]."
 
 def get_ip_address(ifname):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -35,6 +36,7 @@ def get_ip_address(ifname):
     )[20:24])
     
 def getTuples(lines):
+	if verbose: print "Lines: ", lines
 	tuples = ([])
 	splitLines = []
 	for line in lines:
@@ -42,7 +44,7 @@ def getTuples(lines):
 		lineParts = line.split(' ', 3)
 		tuples.append((lineParts[0], (lineParts[2], lineParts[1])))
 		
-	print "Tuples: ", tuples
+	if verbose: print "Tuples: ", tuples
 	return tuples
 
 def main(argv):
@@ -54,6 +56,7 @@ def main(argv):
 	socketType = socket.SOCK_DGRAM
 	sourceIp = "0.0.0.0"
 	server = False
+	verbose = False
 	
 	try:
 		opts, args = getopt.getopt(argv, ":isp", ["interface=", "server=", "port=", "pickle=", "protocol=", "source-ip="])
@@ -82,6 +85,8 @@ def main(argv):
 				sys.exit(2)
 		elif opt in ("--source-ip"):
 			sourceIp = arg
+		elif opt in ("--verbose"):
+			verbose = arg
 	
 	if not server:
 		print "ERROR: --server is a required argument\n"
@@ -89,21 +94,22 @@ def main(argv):
 		sys.exit(2)
 	
 	serverIp = socket.gethostbyname(server)
-	print "Using source-ip: "+sourceIp
-	print "Using server: "+server
-	print "Using server-ip: "+serverIp
-	print "Using port: "+str(port)
+	if verbose:
+		print "Using source-ip: "+sourceIp
+		print "Using server: "+server
+		print "Using server-ip: "+serverIp
+		print "Using port: "+str(port)
 	
 	stdin = sys.stdin.readlines()
 			
 	if pickleFormat:
-		print "Using pickle format: true"
+		if verbose: print "Using pickle format: true"
 		tuples = getTuples(stdin)
 		payload = pickle.dumps(tuples, protocol=2)
 		header = struct.pack("!L", len(payload))
 		message = header + payload
 	else:
-		print "Using pickle format: false"
+		if verbose: print "Using pickle format: false"
 		message = stdin[0]
 		
 	
@@ -111,13 +117,9 @@ def main(argv):
 	s.bind((sourceIp, 0))
 	peerAddress = (server, port)
 	s.connect(peerAddress)
-	print "Sending message: " + message
+	if verbose: print "Sending message: " + message
 	s.sendall(message)
 	data = s.recv(BUFFER_SIZE)
-	#while 1 and socketType == socket.SOCK_STREAM:
-	#	data = s.recv(BUFFER_SIZE)
-	#	if not data: break
-	#	print "Received data: ", data
 	s.close()
 
 if __name__ =='__main__':
