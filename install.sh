@@ -58,6 +58,7 @@ echo >> $CONFIG
 rsync -av * $INSTALL_DIR --exclude ".svn" --exclude ".gitignore" --exclude="install.sh"
 chmod +x $INSTALL_DIR/metric.d/*
 chmod +x $INSTALL_DIR/lib/*
+chmod +x test/*
 cat conf/shellstatd.starter.conf >> $CONFIG
 touch $INSTALL_DIR/conf/jolokia.conf
 touch $INSTALL_DIR/log/graphite.log
