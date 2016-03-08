@@ -11,4 +11,4 @@ SHELLSTATD_HOME=`pwd`
 
 . $SHELLSTATD_HOME/lib/graphite_send.sh
 
-cat example.txt | sendToGraphite
+echo -e $1 | sendToGraphite
