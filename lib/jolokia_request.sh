@@ -71,19 +71,22 @@ function extractMBeanAttribute {
 }
 
 function extractMBeanValue {
-   local TEMP_FILE=$1
-   local MATCH='\["value"'
-   local MBEAN="`egrep $MATCH $TEMP_FILE`"
-   MBEAN="${MBEAN//'value'/}" 
-   local MBEAN_VALUE=`echo $MBEAN | sed -r 's/\,//g;s/\[//g;s/\]//g;s/\"//g;/^\s*$/d'`
-   local regexNumber='^[0-9]+$'
-      if [[ ! "$MBEAN_VALUE" =~ $regexNumber ]]; then
-         # The value is not a number
-         echo $MBEAN_VALUE | sed -r 's/[0-9]+/&\n/g' | awk '{print $1, $2}'
-      else
-         echo $MBEAN_VALUE | sed -r 's/[0-9]+/&/g'
-   fi
-   
+	local TEMP_FILE=$1
+	local MATCH='\["value"'
+	local MBEAN="`egrep $MATCH $TEMP_FILE`"
+	MBEAN="${MBEAN//'value'/}" 
+	local MBEAN_VALUE=`echo $MBEAN | sed -r 's/\,//g;s/\[//g;s/\]//g;s/\"//g;/^\s*$/d'`
+	local regexNumber='^[0-9]+$'
+	if [ $verbose_logging == "True" ]; then
+		echo -e "extractMBeanValue: " >> $LOG
+		echo -e "MBEAN_VALUE: $MBEAN_VALUE" >> $LOG
+	fi
+	if [[ ! "$MBEAN_VALUE" =~ $regexNumber ]]; then
+		# The value is not a number
+		echo $MBEAN_VALUE | sed -r 's/[0-9]+/&\n/g' | awk '{print $1, $2}'
+	else
+		echo $MBEAN_VALUE | sed -r 's/[0-9]+/&/g'
+	fi
 }
 
 function extractMBeanTimestamp {
