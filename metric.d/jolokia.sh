@@ -10,10 +10,11 @@
 function repeatJolokia {
 	while true
 	do
+		local payload = `$1`
 		if [  $verbose_logging == "True"  ]; then
-			echo -e "repeatJolokia: $1\n" >> $LOG
+			echo -e "repeatJolokia: payload\n" >> $LOG
 		fi
-		echo -e `$1` | sendToGraphite
+		echo -e payload | sendToGraphite
 		sleep $graphite_interval_seconds
 	done
 }
