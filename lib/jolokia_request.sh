@@ -75,7 +75,7 @@ function extractMBeanValue {
 	local MATCH='\["value"'
 	local MBEAN="`egrep $MATCH $TEMP_FILE`"
 	MBEAN="${MBEAN//'value'/}" 
-	local MBEAN_VALUE=`echo $MBEAN | sed -r 's/\,//g;s/\[//g;s/\]//g;s/\"//g;/^\s*$/d'`
+	local MBEAN_VALUE=`echo $MBEAN | sed -r 's/\,//g;s/\[//g;s/\]//g;s/\"//g;/^\s*$/d;/^\s*/d'`
 	local regexNumber='^[0-9]+$'
 	if [ $verbose_logging == "True" ]; then
 		echo -e "extractMBeanValue: " >> $LOG
