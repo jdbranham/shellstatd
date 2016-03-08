@@ -56,10 +56,10 @@ def main(argv):
 	socketType = socket.SOCK_DGRAM
 	sourceIp = "0.0.0.0"
 	server = False
-	verbose = False
+	global verbose = False
 	
 	try:
-		opts, args = getopt.getopt(argv, ":isp", ["interface=", "server=", "port=", "pickle=", "protocol=", "source-ip="])
+		opts, args = getopt.getopt(argv, ":isp", ["interface=", "server=", "port=", "pickle=", "protocol=", "source-ip=", "verbose="])
 	except getopt.GetoptError:
 		usage()
 		sys.exit(2)
