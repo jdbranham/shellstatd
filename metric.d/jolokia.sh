@@ -8,11 +8,14 @@
 
 
 function repeatJolokia {
-   while true
-   do
-      echo -e `$1` | sendToGraphite
-      sleep $graphite_interval_seconds
-   done
+	while true
+	do
+		if [  $verbose_logging == "True"  ]; then
+			echo -e "repeatJolokia: $1\n" >> $LOG
+		fi
+		echo -e `$1` | sendToGraphite
+		sleep $graphite_interval_seconds
+	done
 }
 
 CONFIG_FILE=$1

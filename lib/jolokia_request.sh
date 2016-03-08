@@ -15,7 +15,7 @@ function jolokiaRequest {
 		local MBEAN_TIMESTAMP=`extractMBeanTimestamp $TEMP_FILE`
 		rm $TEMP_FILE
 		
-		if [ $verbose_logging == "true" ]; then
+		if [ $verbose_logging == "True" ]; then
 			echo -e "Found MBEAN: "
 			echo -e "MBEAN_NAME: $MBEAN_NAME" >> $LOG
 			echo -e "MBEAN_ATTRIBUTE: $MBEAN_ATTRIBUTE" >> $LOG
@@ -38,7 +38,7 @@ function jolokiaRequest {
 			done < <(echo -e "$MBEAN_VALUE")
 		fi
 		for payload_item in "${PAYLOAD[*]}"; do
-			if [ $verbose_logging == "true" ]; then
+			if [ $verbose_logging == "True" ]; then
 				echo -e "Returning payload to jolokia module: " >> $LOG
 				echo -e "$payload_item" >> $LOG
 			fi
