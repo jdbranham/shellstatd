@@ -12,7 +12,7 @@ function repeatJolokia {
 	do
 		local payload=`$1`
 		if [  $verbose_logging == "True"  ]; then
-			echo -e "repeatJolokia: ${cat $payload}\n" >> $LOG
+			echo -e "repeatJolokia: $(cat ${payload})\n" >> $LOG
 		fi
 		cat $payload | sendToGraphite
 		rm $payload
