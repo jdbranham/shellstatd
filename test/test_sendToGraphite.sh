@@ -14,6 +14,7 @@ SHELLSTATD_HOME=`pwd`
 inputLines=[]
 while read line
 do
+	if [ line == "" ]; then break; fi
   inputLines += "$line"
 done < "${1:-/dev/stdin}"
 
