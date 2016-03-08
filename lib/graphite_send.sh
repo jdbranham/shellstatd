@@ -3,7 +3,8 @@ function sendToGraphite {
 		if [  $verbose_logging == "True"  ]; then
 			echo -e "sendToGraphite: Using python send." >> $LOG
 		fi
-  		cat $1 | $SHELLSTATD_HOME/lib/python_send.py --server=$graphite_host --port=$graphite_port --protocol=$graphite_protocol --verbose=$verbose_logging
+  		cat $1 | $SHELLSTATD_HOME/lib/python_send.py --server=$graphite_host --port=$graphite_port --protocol=$graphite_protocol --verbose=$verbose_logging &
+  		echo $! >> $PID_FILE 
   	else
 		while IFS= read -r line; do
 			if [  $verbose_logging == "True"  ]; then
