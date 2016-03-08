@@ -16,7 +16,7 @@ function jolokiaRequest {
 		rm $TEMP_FILE
 		
 		if [ $verbose_logging == "True" ]; then
-			echo -e "Found MBEAN: "
+			echo -e "Found MBEAN: " >> $LOG
 			echo -e "MBEAN_NAME: $MBEAN_NAME" >> $LOG
 			echo -e "MBEAN_ATTRIBUTE: $MBEAN_ATTRIBUTE" >> $LOG
 			echo -e "MBEAN_VALUE:\n" `echo -e $MBEAN_VALUE | awk '{print "\011", $1, $2}'` >> $LOG
