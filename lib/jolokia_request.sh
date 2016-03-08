@@ -14,7 +14,7 @@ function jolokiaRequest {
 		local MBEAN_VALUE=`extractMBeanValue $TEMP_FILE`
 		local MBEAN_TIMESTAMP=`extractMBeanTimestamp $TEMP_FILE`
 		rm $TEMP_FILE
-		if [ -z $verbose_logging ]; then
+		if [ $verbose_logging == "true" ]; then
 			echo -e "MBEAN_NAME: $MBEAN_NAME\n" >> $LOG
 			echo -e "MBEAN_ATTRIBUTE: $MBEAN_ATTRIBUTE\n" >> $LOG
 			echo -e "MBEAN_VALUE: $MBEAN_VALUE\n" >> $LOG
