@@ -10,7 +10,7 @@
 function repeatJolokia {
    while true
    do
-      echo -e $1 | sendToGraphite
+      echo -e `$1` | sendToGraphite
       sleep $graphite_interval_seconds
    done
 }
