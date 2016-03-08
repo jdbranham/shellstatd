@@ -11,4 +11,10 @@ SHELLSTATD_HOME=`pwd`
 
 . $SHELLSTATD_HOME/lib/graphite_send.sh
 
-echo -e $1 | sendToGraphite
+inputLines=[]
+while read line
+do
+  inputLines += "$line"
+done < "${1:-/dev/stdin}"
+
+echo -e inputLines | sendToGraphite
