@@ -2,6 +2,7 @@
 
 # Requires JSON.sh
 function jolokiaRequest { 
+	local RESULT=(mktemp)
 	# open file for read, assign descriptor
 	exec 3<$1
 	while read -u 3 LINE
@@ -42,11 +43,12 @@ function jolokiaRequest {
 				echo -e "Returning payload to jolokia module: " >> $LOG
 				echo -e "$payload_item" >> $LOG
 			fi
-			echo -e "$payload_item"
+			echo -e "$payload_item" >> $RESULT
 		done
 	done
 	# close file
 	exec 3<&-
+	cat $RESULT
 }
 
 function extractMBeanName {
