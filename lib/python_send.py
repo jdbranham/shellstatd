@@ -118,12 +118,10 @@ def main(argv):
 	s = socket.socket(socket.AF_INET, socketType)
 	s.bind((sourceIp, 0))
 	peerAddress = (server, port)
-	#s.connect(peerAddress)
+	s.connect(peerAddress)
 	if verbose: print "Sending message: " + message
 	s.sendall(message)
-	data = s.recv(BUFFER_SIZE)
-	if verbose: print "Received message: " + data
-	#s.close()
+	s.close()
 
 if __name__ =='__main__':
 	main(sys.argv[1:])
