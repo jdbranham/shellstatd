@@ -14,14 +14,15 @@ function jolokiaRequest {
 		local MBEAN_VALUE=`extractMBeanValue $TEMP_FILE`
 		local MBEAN_TIMESTAMP=`extractMBeanTimestamp $TEMP_FILE`
 		rm $TEMP_FILE
-		if [ $verbose_logging == "true" ]; then
-			echo -e "MBEAN_NAME: $MBEAN_NAME\n" >> $LOG
-			echo -e "MBEAN_ATTRIBUTE: $MBEAN_ATTRIBUTE\n" >> $LOG
-			echo -e "MBEAN_VALUE: $MBEAN_VALUE\n" >> $LOG
-			echo -e "MBEAN_TIMESTAMP: $MBEAN_TIMESTAMP\n" >> $LOG
-		fi
 		
-	      
+		if [ $verbose_logging == "true" ]; then
+			echo -e "Found MBEAN: "
+			echo -e "MBEAN_NAME: $MBEAN_NAME" >> $LOG
+			echo -e "MBEAN_ATTRIBUTE: $MBEAN_ATTRIBUTE" >> $LOG
+			echo -e "MBEAN_VALUE:\n ${echo $MBEAN_VALUE | awk '{print \t, $1, $2}'" >> $LOG
+			echo -e "MBEAN_TIMESTAMP: $MBEAN_TIMESTAMP" >> $LOG
+		fi
+
 		local	PAYLOAD=()
 		local regexNumber='^[0-9]+$'
 		if [[ "$MBEAN_VALUE" =~ $regexNumber ]]; then
@@ -37,6 +38,10 @@ function jolokiaRequest {
 			done < <(echo -e "$MBEAN_VALUE")
 		fi
 		for payload_item in "${PAYLOAD[*]}"; do
+			if [ $verbose_logging == "true" ]; then
+				echo -e "Returning payload to jolokia module: "
+				echo -e "$payload_item" >> $LOG
+			fi
 			echo -e "$payload_item"
 		done
 	done
