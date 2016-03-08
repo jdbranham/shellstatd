@@ -10,6 +10,6 @@ function sendToGraphite {
 				echo -e "sendToGraphite: Using bash send." >> $LOG
 			fi
 			echo "$line" > /dev/$graphite_protocol/$graphite_host/$graphite_port
-  		done << <(cat $1)
+  		done < <(cat $1)
   	fi
 }
