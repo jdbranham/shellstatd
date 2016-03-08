@@ -44,8 +44,8 @@ def getTuples(lines):
 	for line in lines:
 		line = re.sub('[\'\n]', '', line)
 		lineParts = line.split(' ', 3)
-		tuples.append((lineParts[0], (lineParts[2], lineParts[1])))
-		
+		if len(lineParts) == 3:
+			tuples.append((lineParts[0], (lineParts[2], lineParts[1])))
 	if verbose: print "Tuples: ", tuples
 	return tuples
 
