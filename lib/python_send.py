@@ -119,7 +119,7 @@ def main(argv):
 	s.bind((sourceIp, 0))
 	peerAddress = (server, port)
 	s.connect(peerAddress)
-	if verbose and !pickleFormat: print "Sending message: " + message
+	if verbose and pickleFormat == False: print "Sending message: " + message
 	s.sendall(message)
 	s.close()
 
