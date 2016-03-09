@@ -1,6 +1,6 @@
 #!/bin/bash
 
-regexNoAlpha='^((?![a-zA-Z]).)*$'
+regexNoAlpha='^((?![a-zA-Z]).)'
 
 # Requires JSON.sh
 function jolokiaRequest { 
