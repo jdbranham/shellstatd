@@ -26,7 +26,7 @@ function jolokiaRequest {
 			echo -e "MBEAN_TIMESTAMP: $MBEAN_TIMESTAMP" >> $LOG
 		fi
 
-		local PAYLOAD=()
+		PAYLOAD=()
 		if [[ ! $MBEAN_VALUE =~ $regexNumberStart ]]; then
 			while read -r value_entry; do
 				if [ ! "$value_entry" = "" ]; then
