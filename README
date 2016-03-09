@@ -35,13 +35,23 @@ To install shellstatd, run installer.sh.  Usage:
     [sudo] ./install.sh <install dir> <graphite host> <monitor interval> [ graphite port (default is 2003) ]
 
 
-shellstatd is controlled by a startup script in /etc/init.d.  Usage:
+To modify shellstatd settings (such as which metrics you wish to
+monitor), edit /etc/shellstatd.conf.
+
+
+Command Line Usage:
+shellstatd start | stop | restart
+.
+Options:
+-c    Configuration File Location
+-l    Log File Location
+
+
+
+shellstatd can be controlled by a startup script in '/etc/init.d' if you used sudo to install.  Usage:
 
     /etc/init.d/shellstatd  start | stop | restart
 
-
-To modify shellstatd settings (such as which metrics you wish to
-monitor), edit /etc/shellstatd.conf.
 
 # Jolokia Module:
  Add Jolokia request URLs to "conf/jolokia.conf", one on each line, for the Jolokia monitor to aggregate metrics and forward them to Graphite
