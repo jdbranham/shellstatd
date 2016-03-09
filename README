@@ -40,7 +40,7 @@ monitor), edit /etc/shellstatd.conf.
 
 
 Command Line Usage:
-shellstatd start | stop | restart
+shellstatd [start | stop | restart] [OPTION]
 .
 Options:
 -c    Configuration File Location

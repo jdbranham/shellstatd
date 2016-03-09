@@ -4,7 +4,7 @@ ACTION=$1
 if [ "$ACTION" == "" ] 
 then
    echo "Usage:  "
-   echo "shellstatd start | stop | restart"
+   echo "shellstatd start|stop|restart [OPTION]"
    echo .
    echo "Options:"
    echo "-c    Configuration File Location"
