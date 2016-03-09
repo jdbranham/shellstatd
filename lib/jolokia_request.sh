@@ -4,7 +4,7 @@ regexNumberStart='^([0-9]).'
 
 # Requires JSON.sh
 function jolokiaRequest { 
-	local RESULT=(mktemp)
+	local RESULT=$2
 	# open file for read, assign descriptor
 	exec 3<$1
 	while read -u 3 LINE
@@ -50,7 +50,6 @@ function jolokiaRequest {
 	done
 	# close file
 	exec 3<&-
-	echo $RESULT
 }
 
 function extractMBeanName {

@@ -17,7 +17,7 @@ function repeatJolokia {
 	while true
 	do
 		local PAYLOAD=(mktemp)
-		$1 >> $PAYLOAD
+		$1 $PAYLOAD
 		if [  $verbose_logging == "True"  ]; then
 			echo -e "repeatJolokia: payload:\n $(cat ${PAYLOAD})\n" >> $LOG
 		fi
