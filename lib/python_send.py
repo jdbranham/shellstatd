@@ -51,6 +51,8 @@ def getTuples(lines):
 
 def main(argv):
 
+	if verbose: print "Entering python_send:"
+	
 	BUFFER_SIZE = 1024
 	netInterface = "eth0"
 	port = 2003
