@@ -81,7 +81,7 @@ function extractMBeanValue {
 		# The value is not a number
 		echo $MBEAN_VALUE | sed -r 's/[0-9]+/&\n/g' | awk '{print $1, $2}'
 	else
-		echo $MBEAN_VALUE | sed -r 's/[0-9]+/&/g;s/\n//g'
+		echo $MBEAN_VALUE | sed -rn 's/[0-9]+/&/p'
 	fi
 }
 
