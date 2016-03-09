@@ -43,9 +43,9 @@ function jolokiaRequest {
 		for payload_item in "${PAYLOAD[*]}"; do
 			if [ $verbose_logging == "True" ]; then
 				echo -e "Returning payload to jolokia module: " >> $LOG
-				echo "$payload_item" >> $LOG
+				echo -e "$payload_item" >> $LOG
 			fi
-			echo "$payload_item" >> $RESULT
+			echo -e "$payload_item" >> $RESULT
 		done
 	done
 	# close file
@@ -86,7 +86,7 @@ function extractMBeanValue {
 		# The value is not a number
 		echo $MBEAN_VALUE | sed -r 's/[0-9]+/&\n/g' | awk '{print $1, $2}'
 	else
-		echo $MBEAN_VALUE | sed -r 's/[0-9]+/&/g;s/\n//'
+		echo $MBEAN_VALUE | sed -r 's/[0-9]+/&/g;s/\n//g' | awk '{print $1}'
 	fi
 }
 
