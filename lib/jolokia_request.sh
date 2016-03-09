@@ -22,20 +22,23 @@ function jolokiaRequest {
 			echo -e "Found MBEAN: " >> $LOG
 			echo -e "MBEAN_NAME: $MBEAN_NAME" >> $LOG
 			echo -e "MBEAN_ATTRIBUTE: $MBEAN_ATTRIBUTE" >> $LOG
-			echo -e "MBEAN_VALUE:\n" `echo $MBEAN_VALUE | awk '{print "\011", $1, $2}'` >> $LOG
+			echo -e "MBEAN_VALUE:\n" `echo -e $MBEAN_VALUE | awk '{print "\011", $1, $2}'` >> $LOG
 			echo -e "MBEAN_TIMESTAMP: $MBEAN_TIMESTAMP" >> $LOG
 		fi
 
-		PAYLOAD=()
+		local PAYLOAD=()
 		if [[ ! $MBEAN_VALUE =~ $regexNumberStart ]]; then
 			while read -r value_entry; do
 				if [ ! "$value_entry" = "" ]; then
-					PAYLOAD+=("$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP")
+					local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP"
+					PAYLOAD+=("${full_string}")
 				fi
-			done < <(echo -e "$MBEAN_VALUE")
+			done <<<"$(echo -e $MBEAN_VALUE)"
 		else
 			# The value is a number
-			PAYLOAD+=("$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP") 
+			local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP"
+			PAYLOAD+=("${full_string}") 
+			
 		fi
 		for payload_item in "${PAYLOAD[@]}"; do
 			echo -e "$payload_item" >> $RESULT
