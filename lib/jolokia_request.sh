@@ -40,7 +40,7 @@ function jolokiaRequest {
 			PAYLOAD+=("${full_string}") 
 			
 		fi
-		for payload_item in "${PAYLOAD[@]}"; do
+		for payload_item in "${PAYLOAD[*]}"; do
 			echo -e "$payload_item" >> $RESULT
 		done
 	done
