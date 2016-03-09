@@ -16,7 +16,7 @@ JOLOKIA_URLS=$SHELLSTATD_HOME/conf/jolokia.conf
 function repeatJolokia {
 	while true
 	do
-		local PAYLOAD_FILE=(mktemp)
+		local PAYLOAD_FILE=$(mktemp)
 		$1 $PAYLOAD_FILE
 		if [  $verbose_logging == "True"  ]; then
 			echo -e "repeatJolokia: payload:\n $(cat ${PAYLOAD_FILE})\n" >> $LOG
