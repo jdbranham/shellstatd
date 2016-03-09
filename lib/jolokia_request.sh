@@ -39,8 +39,8 @@ function jolokiaRequest {
 		else
 			# The value is a number
 			local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP"
-			full_string=$(echo -e $full_string | sed -rn 's/\n//g;s/^\s//p')
-			PAYLOAD+=("${full_string}") 
+			#full_string=$(echo -e $full_string | sed -rn 's/\n//g;s/^\s//p')
+			PAYLOAD+=("$(echo $full_string)") 
 			
 		fi
 		for payload_item in "${PAYLOAD[@]}"; do
