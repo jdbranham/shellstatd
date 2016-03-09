@@ -1,10 +1,9 @@
+#shellstatd 
 shellstatd gathers OS-level performance statistics and sends
 them to a running instance of Graphite.
 
-
 It is a collection of bash shell scripts that gather the output
-from existing system monitoring tools like Jolokia, vmstat, sar, and iostat,
-and forwards the data on to Graphite where it can be
+from existing system monitoring tools to aggregate and forward the data on to Graphite where it can be
 visualized.
 
 There are other, more "production-ready" tools (like collectd, with
@@ -40,11 +39,11 @@ monitor), edit /etc/shellstatd.conf.
 
 
 Command Line Usage:
-shellstatd [start | stop | restart] [OPTION]
-.
-Options:
--c    Configuration File Location
--l    Log File Location
+
+    shellstatd [start | stop | restart] [OPTION]
+    Options:
+    -c    Configuration File Location
+    -l    Log File Location
 
 
 
@@ -53,9 +52,33 @@ shellstatd can be controlled by a startup script in '/etc/init.d' if you used su
     /etc/init.d/shellstatd  start | stop | restart
 
 
-# Jolokia Module:
- Add Jolokia request URLs to "conf/jolokia.conf", one on each line, for the Jolokia monitor to aggregate metrics and forward them to Graphite
- An optional python script can be enabled in "conf/shellstatd.conf" to enable 'pickling' the data.
+# Modules
+> jolokia
+- Aggregates and formats json output from a jolokia server 
+- Add Jolokia request URLs to "conf/jolokia.conf", one on each line, for the Jolokia monitor to aggregate metrics and forward them to Graphite
+- An optional python script can be enabled in "conf/shellstatd.conf" to enable 'pickling' the data.
+
+
+ 
+> df
+- Aggregates all the disk mount points and the used/available space
+
+> iostat
+- Formats and send iostat data
+ 
+> mpstat
+- Formats and sends mpstat data
+ 
+> sar_load
+- Formats and sends load avgs for sar
+ 
+> sar_network
+- Formats and sends network interface data from sar
+ 
+> vmstat
+- Formats and sends data from vmstat
+ 
+
 
 
 Thanks to Travis Bear from which this project was based on -
