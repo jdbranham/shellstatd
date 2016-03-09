@@ -37,7 +37,7 @@ function jolokiaRequest {
 		else
 			# The value is a number
 			local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP\n"
-			PAYLOAD+=("{$full_string}") 
+			PAYLOAD+=("${full_string}") 
 			
 		fi
 		for payload_item in "${PAYLOAD[*]}"; do
