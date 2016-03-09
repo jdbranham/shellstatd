@@ -28,7 +28,7 @@ function jolokiaRequest {
 
 		local PAYLOAD=()
 		if [[ ! $MBEAN_VALUE =~ $regexNumberStart ]]; then
-			while read -r value_entry; do
+			while read value_entry; do
 				if [ ! "$value_entry" = "" ]; then
 					local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP"
 					PAYLOAD+=("${full_string}")
