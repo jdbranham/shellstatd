@@ -1,6 +1,6 @@
 #!/bin/bash
 
-regexAlpha='^((?![a-zA-Z]).)*$'
+regexNoAlpha='^((?![a-zA-Z]).)*$'
 
 # Requires JSON.sh
 function jolokiaRequest { 
@@ -27,17 +27,18 @@ function jolokiaRequest {
 		fi
 
 		local	PAYLOAD=()
-		if [[ "$MBEAN_VALUE" =~ $regexAlpha ]]; then
+		if [[ ! "$MBEAN_VALUE" =~ $regexNoAlpha ]]; then
+			while read -r value_entry; do
+				if [ ! "$value_entry" = "" ]; then
+					local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP\n"
+					PAYLOAD+=("${full_string}")
+				fi
+			done < <(echo -e "$MBEAN_VALUE")
+		else
 			# The value is a number
 			local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP\n"
 			PAYLOAD+=("${full_string}") 
-		else
-			while read -r value_entry; do
-			if [ ! "$value_entry" = "" ]; then
-				local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP\n"
-				PAYLOAD+=("${full_string}")
-			fi
-			done < <(echo -e "$MBEAN_VALUE")
+			
 		fi
 		for payload_item in "${PAYLOAD[*]}"; do
 			if [ $verbose_logging == "True" ]; then
@@ -81,7 +82,7 @@ function extractMBeanValue {
 		echo -e "extractMBeanValue: " >> $LOG
 		echo -e "MBEAN_VALUE: $MBEAN_VALUE" >> $LOG
 	fi
-	if [[ ! "$MBEAN_VALUE" =~ $regexAlpha ]]; then
+	if [[ ! "$MBEAN_VALUE" =~ $regexNoAlpha ]]; then
 		# The value is not a number
 		echo $MBEAN_VALUE | sed -r 's/[0-9]+/&\n/g' | awk '{print $1, $2}'
 	else
