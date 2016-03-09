@@ -22,7 +22,7 @@ function jolokiaRequest {
 			echo -e "Found MBEAN: " >> $LOG
 			echo -e "MBEAN_NAME: $MBEAN_NAME" >> $LOG
 			echo -e "MBEAN_ATTRIBUTE: $MBEAN_ATTRIBUTE" >> $LOG
-			echo -e "MBEAN_VALUE:\n" `echo -e $MBEAN_VALUE | awk '{print "\011", $1, $2}'` >> $LOG
+			echo -e "MBEAN_VALUE:\n" `echo $MBEAN_VALUE | awk '{print "\011", $1, $2}'` >> $LOG
 			echo -e "MBEAN_TIMESTAMP: $MBEAN_TIMESTAMP" >> $LOG
 		fi
 
@@ -43,9 +43,9 @@ function jolokiaRequest {
 		for payload_item in "${PAYLOAD[*]}"; do
 			if [ $verbose_logging == "True" ]; then
 				echo -e "Returning payload to jolokia module: " >> $LOG
-				echo -e "$payload_item" >> $LOG
+				echo "$payload_item" >> $LOG
 			fi
-			echo -e "$payload_item" >> $RESULT
+			echo "$payload_item" >> $RESULT
 		done
 	done
 	# close file
