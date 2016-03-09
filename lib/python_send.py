@@ -50,8 +50,6 @@ def getTuples(lines):
 	return tuples
 
 def main(argv):
-
-	if verbose: print "Entering python_send:"
 	
 	BUFFER_SIZE = 1024
 	netInterface = "eth0"
@@ -104,6 +102,7 @@ def main(argv):
 		print "Using server-ip: "+serverIp
 		print "Using port: "+str(port)
 	
+	if verbose: print "python_send: Reading stdin"
 	stdin = sys.stdin.readlines()
 			
 	if pickleFormat:
