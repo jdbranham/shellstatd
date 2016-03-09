@@ -41,15 +41,15 @@ function jolokiaRequest {
 			
 		fi
 		for payload_item in "${PAYLOAD[*]}"; do
-			if [ $verbose_logging == "True" ]; then
-				echo -e "Returning payload to jolokia module: " >> $LOG
-				echo -e "$payload_item" >> $LOG
-			fi
 			echo -e "$payload_item" >> $RESULT
 		done
 	done
 	# close file
 	exec 3<&-
+	if [ $verbose_logging == "True" ]; then
+		echo -e "Returning payload to jolokia module: " >> $LOG
+		cat $RESULT >> $LOG
+	fi
 }
 
 function extractMBeanName {
