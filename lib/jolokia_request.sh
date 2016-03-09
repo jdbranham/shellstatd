@@ -30,15 +30,12 @@ function jolokiaRequest {
 		if [[ ! $MBEAN_VALUE =~ $regexNumberStart ]]; then
 			while read -r value_entry; do
 				if [ ! "$value_entry" = "" ]; then
-					local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP"
-					PAYLOAD=("${PAYLOAD[@]}" "${full_string}")
+					PAYLOAD+=("$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP")
 				fi
 			done < <(echo -e "$MBEAN_VALUE")
 		else
 			# The value is a number
-			local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP"
-			PAYLOAD=("${PAYLOAD[@]}" "${full_string}") 
-			
+			PAYLOAD+=("$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP") 
 		fi
 		for payload_item in "${PAYLOAD[@]}"; do
 			echo -e "$payload_item" >> $RESULT
