@@ -39,6 +39,7 @@ function jolokiaRequest {
 		else
 			# The value is a number
 			local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE $MBEAN_VALUE $MBEAN_TIMESTAMP"
+			full_string=$(echo -e $full_string | sed -rn 's/\n//g;s/^\s//p')
 			PAYLOAD+=("${full_string}") 
 			
 		fi
@@ -81,7 +82,7 @@ function extractMBeanValue {
 		# The value is not a number
 		echo $MBEAN_VALUE | sed -r 's/[0-9]+/&\n/g' | awk '{print $1, $2}'
 	else
-		echo $MBEAN_VALUE | sed -rn 's/[0-9]+/&/p'
+		echo $MBEAN_VALUE | sed -rn 's/[0-9]+$/&/p'
 	fi
 }
 
