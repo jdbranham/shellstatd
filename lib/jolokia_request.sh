@@ -19,6 +19,8 @@ function jolokiaRequest {
 		rm $TEMP_FILE
 		
 		if [ $verbose_logging == "True" ]; then
+			echo -e "\n### jolokiaRequest ###"
+			echo -e "Created TEMP_FILE: $TEMP_FILE"
 			echo -e "Found MBEAN: " >> $LOG
 			echo -e "MBEAN_NAME: $MBEAN_NAME" >> $LOG
 			echo -e "MBEAN_ATTRIBUTE: $MBEAN_ATTRIBUTE" >> $LOG
@@ -56,11 +58,9 @@ function extractMBeanName {
    local TEMP_FILE=$1
    local MATCH='\["request","mbean"\]'
    local MBEAN="`egrep $MATCH $TEMP_FILE`"
-   #echo -e "First - $MBEAN\n"
    MBEAN="${MBEAN/$MATCH/$HOSTNAME}" 
    MBEAN="${MBEAN//':type'/}" 
-   MBEAN="${MBEAN//':name'/}" 
-   #echo -e "Second: $MBEAN\n"
+   MBEAN="${MBEAN//':name'/}"
    echo $MBEAN | sed -r 's/\ //g;s/[=,\"]/./g' | awk '{print $1}'
 }
 
@@ -77,10 +77,6 @@ function extractMBeanValue {
 	local MBEAN="`egrep $MATCH $TEMP_FILE`"
 	MBEAN="${MBEAN//'value'/}" 
 	local MBEAN_VALUE=`echo $MBEAN | sed -r 's/\,//g;s/\[//g;s/\]//g;s/\"//g;/^\s*$/d'`
-	if [ $verbose_logging == "True" ]; then
-		echo -e "extractMBeanValue: " >> $LOG
-		echo -e "MBEAN_VALUE: $MBEAN_VALUE" >> $LOG
-	fi
 	if [[ ! $MBEAN_VALUE =~ $regexNumberStart ]]; then
 		# The value is not a number
 		echo $MBEAN_VALUE | sed -r 's/[0-9]+/&\n/g' | awk '{print $1, $2}'
