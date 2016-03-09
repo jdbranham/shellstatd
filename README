@@ -1,13 +1,9 @@
 shellstatd gathers OS-level performance statistics and sends
 them to a running instance of Graphite.
 
-This is based on Travis Bear's quickstatd -
-https://bitbucket.org/travis_bear/quickstatd
-Thanks Travis!
-
 
 It is a collection of bash shell scripts that gather the output
-from existing system monitoring tools like vmstat, sar, and iostat,
+from existing system monitoring tools like Jolokia, vmstat, sar, and iostat,
 and forwards the data on to Graphite where it can be
 visualized.
 
@@ -51,4 +47,7 @@ monitor), edit /etc/shellstatd.conf.
  Add Jolokia request URLs to "conf/jolokia.conf", one on each line, for the Jolokia monitor to aggregate metrics and forward them to Graphite
  An optional python script can be enabled in "conf/shellstatd.conf" to enable 'pickling' the data.
 
+
+Thanks to Travis Bear from which this project was based on -
+https://bitbucket.org/travis_bear/quickstatd
 
