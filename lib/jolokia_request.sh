@@ -31,7 +31,7 @@ function jolokiaRequest {
 			while read -r value_entry; do
 				if [ ! "$value_entry" = "" ]; then
 					local full_string="$PREFIX$MBEAN_NAME$MBEAN_ATTRIBUTE.$value_entry $MBEAN_TIMESTAMP"
-					PAYLOAD=("${PAYLOAD[@]}" ${full_string}")
+					PAYLOAD=("${PAYLOAD[@]}" "${full_string}")
 				fi
 			done < <(echo -e "$MBEAN_VALUE")
 		else
