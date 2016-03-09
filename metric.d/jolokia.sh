@@ -16,12 +16,13 @@ JOLOKIA_URLS=$SHELLSTATD_HOME/conf/jolokia.conf
 function repeatJolokia {
 	while true
 	do
-		local payload=`$1`
+		local RESULT=(mktemp)
+		$1 >> $RESULT
 		if [  $verbose_logging == "True"  ]; then
-			echo -e "repeatJolokia: payload:\n $(cat ${payload})\n" >> $LOG
+			echo -e "repeatJolokia: payload:\n $(cat ${RESULT})\n" >> $LOG
 		fi
-		sendToGraphite $payload
-		rm $payload
+		sendToGraphite $RESULT
+		rm $RESULT
 		sleep $graphite_interval_seconds
 	done
 }
