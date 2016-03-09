@@ -47,3 +47,8 @@ shellstatd is controlled by a startup script in /etc/init.d.  Usage:
 To modify shellstatd settings (such as which metrics you wish to
 monitor), edit /etc/shellstatd.conf.
 
+# Jolokia Module:
+ Add Jolokia request URLs to "conf/jolokia.conf", one on each line, for the Jolokia monitor to aggregate metrics and forward them to Graphite
+ An optional python script can be enabled in "conf/shellstatd.conf" to enable 'pickling' the data.
+
+
