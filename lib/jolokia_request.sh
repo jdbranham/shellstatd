@@ -62,7 +62,7 @@ function extractMBeanName {
    MBEAN="${MBEAN/$MATCH/$HOSTNAME}" 
    MBEAN="${MBEAN//':type'/}" 
    MBEAN="${MBEAN//':name'/}"
-   echo $MBEAN | sed -r 's/\ //g;s/[=,\"]/./g' | awk '{print $1}'
+   echo $MBEAN | sed -r 's/\ //g;s/[=,\"]/./g;s/\*//g;s/\.\./\./g' | awk '{print $1}'
 }
 
 function extractMBeanAttribute {
