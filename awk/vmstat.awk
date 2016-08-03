@@ -9,31 +9,31 @@
 
 /.*[0-9]/{
    # PROCS
-   print "servers." hostname ".vmstat.procs.running " $1 " " systime()
-   print "servers." hostname ".vmstat.procs.blocked " $2 " " systime()
+   print PREFIX ".vmstat.procs.running " $1 " " systime()
+   print PREFIX ".vmstat.procs.blocked " $2 " " systime()
 
    # MEMORY
-   print "servers." hostname ".vmstat.mem.swapped " $3 " " systime()
-   print "servers." hostname ".vmstat.mem.free " $4 " " systime()
-   print "servers." hostname ".vmstat.mem.buffer " $5 " " systime()
-   print "servers." hostname ".vmstat.mem.cache " $6 " " systime()
+   print PREFIX ".vmstat.mem.swapped " $3 " " systime()
+   print PREFIX ".vmstat.mem.free " $4 " " systime()
+   print PREFIX ".vmstat.mem.buffer " $5 " " systime()
+   print PREFIX ".vmstat.mem.cache " $6 " " systime()
    
    # SWAP
-   print "servers." hostname ".vmstat.swap.in " $7 " " systime()
-   print "servers." hostname ".vmstat.swap.out " $8 " " systime()
+   print PREFIX ".vmstat.swap.in " $7 " " systime()
+   print PREFIX ".vmstat.swap.out " $8 " " systime()
 
    # I/O
-   print "servers." hostname ".vmstat.io.blocks_in " $9 " " systime()
-   print "servers." hostname ".vmstat.io.blocks_out " $10 " " systime()
+   print PREFIX ".vmstat.io.blocks_in " $9 " " systime()
+   print PREFIX ".vmstat.io.blocks_out " $10 " " systime()
 
    # SYSTEM
-   print "servers." hostname ".vmstat.sys.interrupts " $11 " " systime()
-   print "servers." hostname ".vmstat.sys.ctxt_switches " $12 " " systime()
+   print PREFIX ".vmstat.sys.interrupts " $11 " " systime()
+   print PREFIX ".vmstat.sys.ctxt_switches " $12 " " systime()
 
    # CPU
-   print "servers." hostname ".vmstat.cpu.user " $13 " " systime()
-   print "servers." hostname ".vmstat.cpu.system " $14 " " systime()
-   print "servers." hostname ".vmstat.cpu.idle " $15 " " systime()
-   print "servers." hostname ".vmstat.cpu.iowait " $16 " " systime()
+   print PREFIX ".vmstat.cpu.user " $13 " " systime()
+   print PREFIX ".vmstat.cpu.system " $14 " " systime()
+   print PREFIX ".vmstat.cpu.idle " $15 " " systime()
+   print PREFIX ".vmstat.cpu.iowait " $16 " " systime()
 }
 

@@ -8,7 +8,6 @@
 
 CONFIG_FILE=$1
 . $CONFIG_FILE
-HOSTNAME=$(hostname -s)
 . $SHELLSTATD_HOME/lib/graphite_send.sh
 . $SHELLSTATD_HOME/lib/jolokia_request.sh
 JOLOKIA_URLS=$SHELLSTATD_HOME/conf/jolokia.conf

@@ -27,10 +27,8 @@ do
    fi
 done
 
-if [ -f "$CONFIG_FILE" ] 
-   then
-   echo "Using configuration file: $CONFIG_FILE"
-else
+if [ ! -f "$CONFIG_FILE" ] 
+then
    if [ -f "/etc/shellstatd.conf" ] 
    then
       CONFIG_FILE="/etc/shellstatd.conf"
@@ -46,6 +44,8 @@ if [ ! -f "$CONFIG_FILE" ]
 then
    echo "FATAL: config file '$CONFIG_FILE' not found."
    exit 1
+else
+   echo "Using configuration file: $CONFIG_FILE"
 fi
 
 . $CONFIG_FILE
@@ -86,6 +86,10 @@ function stop() {
    for PID in $(cat $PID_FILE)
    do
       kill -15 $PID > /dev/null 2>&1
+      while [[ ( -d /proc/$PID ) && ( -z `grep zombie /proc/$PID/status` ) ]]; do
+          echo "Waiting for PID to finish: $PID"
+          sleep 1
+      done
    done
    rm $PID_FILE
 }

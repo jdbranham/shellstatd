@@ -2,7 +2,6 @@
 
 CONFIG_FILE=$1
 . $CONFIG_FILE
-HOSTNAME=$(hostname -s)
 . $SHELLSTATD_HOME/lib/graphite_send.sh
 
 # get the units -- bytes or KB?
@@ -16,7 +15,7 @@ fi
 
 echo "Launching sar network monitoring, reporting data to $graphite_host"
 sar -n DEV $graphite_interval_seconds 99999999999 | gawk -f $SHELLSTATD_HOME/awk/sar_network.awk \
-                hostname=$HOSTNAME \
+                PREFIX=$PREFIX \
                 interface=$NETWORK_INTERFACE \
                 units=$UNITS | sendToGraphite &
 echo $! >> $PID_FILE

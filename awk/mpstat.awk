@@ -8,6 +8,6 @@
 
 
 /^[0-9][0-9]\:[0-9][0-9]\:[0-9][0-9] [A-Z][A-Z] +[0-9]+/{
-   print "servers." hostname ".mpstat.cpu." $3 ".idle " $12 " " systime()
+   print PREFIX ".mpstat.cpu." $3 ".idle " $12 " " systime()
 }
 
